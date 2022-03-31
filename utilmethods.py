@@ -275,6 +275,7 @@ def euler_explicit_systems(f:'Callable[float, ...]', vec0:np.ndarray, t0:float, 
     
     return u
 
+# TODO: Pending tests
 def euler_implicit(f:'Callable[float, float]', y0:float, t0:float, t:float, h:float, *args, **kwargs)-> np.ndarray:
     """Computes the implicit (backward) Euler method to solve ODEs.
 

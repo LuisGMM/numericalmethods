@@ -6,7 +6,6 @@ import numpy as np
 
 
 
-
 def composite_trapezoid(f_:'Callable[float]', a:float, b:float, n:float)-> float:
     """Computes the analitical solution of the integral of f from a to b 
     following the composite trapezoidal rule. 

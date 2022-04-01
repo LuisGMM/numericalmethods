@@ -82,8 +82,8 @@ def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_0
         f (Callable[float]): Function of which we want to find roots f(x)=0.
         a (float): Lower bound of the interval.
         b (float): Upper bound of the interval.
-        Nmax (int): Maximum number of iterations. Defaults to 100_000
         err (float): Tolerance of the result. It assures that the root is in [x-err, x+err]. #TODO: Is this the interval?
+        Nmax (int): Maximum number of iterations. Defaults to 100_000
 
     Raises:
         ValueError: If, according to Bolzano's theorem, there cannot be roots in [a, b]. 
@@ -104,12 +104,12 @@ def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_0
     if f(a)*f(b) >= 0:
         raise ValueError(f'{f(a)*f(b)=} <0. \t No roots in this interval.')
     
-    N = min(Nmax, np.ceil(np.log((b-a)/err) / np.log(2) - 1))
+    N = int(min(Nmax, np.ceil(np.log((b-a)/err) / np.log(2) - 1))) # What is this?
     a_n = a
     b_n = b
     m_n = (a_n + b_n)/2
     f_m_n = f(m_n)
-    for _ in np.arange(1,N+1):
+    for _ in range(1,N+1):
         
         if f(a_n)*f_m_n < 0:
             b_n = m_n    
@@ -120,15 +120,36 @@ def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_0
         m_n = (a_n + b_n)/2
         f_m_n = f(m_n)
 
-        if abs(f_m_n) <=  err: 
-            return f_m_n
+        if abs(f_m_n) <= err: 
+            return m_n
     
     raise ValueError(f'Could not find a root in the interval [{a}, {b}] with tolerance {err} in {N} iterations.')
 
+# TODO: Not validated
+def chord(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000, x0:float = None) -> float:
+     
+    if f(a)*f(b) >= 0:
+        raise ValueError(f'{f(a)*f(b)=} <0. \t No roots in this interval.')
+    
+    x0_ = x0 if x0 is not None else (a+b)/2 # TODO: Check if there is a better initial guess
+    f_x_n = f(x0_)
+    q = (f(b) - f(a)) / (b - a)
 
-def chord(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000) -> np.ndarray:
-    raise NotImplementedError()
+    for _ in range(1, Nmax+1):
+        
+        x_n = x0_ - f_x_n / q
+        f_x_n = f(x_n)
+
+        if abs(f_x_n) <= err: 
+            return x_n
+
+    raise ValueError(f'Could not find a root in the interval [{a}, {b}] with tolerance {err} in {Nmax} iterations.')
+
 
 
 if __name__ == '__main__':
     pass
+    # f = lambda x: (x**2 - 1)
+    # a = chord(f, 0.5, 2, 1e-2, 1000)
+
+    # print(f(a), f(a) < 1e-2)

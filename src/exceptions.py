@@ -1,2 +1,5 @@
 
-# TODO: Implement on the fly exception in newton method
+
+
+class InadequateArgsCombination(Exception):
+    pass

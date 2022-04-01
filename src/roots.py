@@ -164,7 +164,30 @@ def chord(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000, 
     raise ValueError(f'Could not find a root in the interval [{a}, {b}] with tolerance {err} in {Nmax} iterations.')
 
 def secant(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000, x0:float = None) -> float:
-    raise NotImplementedError()
+    
+    if f(a)*f(b) >= 0:
+        raise ValueError(f'{f(a)*f(b)=} <0. \t No roots in this interval.')
+    
+    x_n = x0 if x0 is not None else (a+b)/2 # TODO: Check if there is a better initial guess
+    x_previous = a - 1 # TODO: Check if there is a better initial guess
+    f_x_n = f(x_n)
+
+    for _ in range(1, Nmax+1):
+            
+        f_x_previous = f(x_previous)
+
+        q_n = (f_x_n - f_x_previous) / (x_n - x_previous)
+        x_previous = x_n
+        
+        x_n = x_n - f_x_n / q_n
+        
+        f_x_n = f(x_n)
+        if abs(f_x_n) <= err: 
+            return x_n
+
+    raise ValueError(f'Could not find a root in the interval [{a}, {b}] with tolerance {err} in {Nmax} iterations.')
+
+    
 
 if __name__ == '__main__':
     pass
@@ -172,3 +195,6 @@ if __name__ == '__main__':
     # a = chord(f, 0.5, 2, 1e-2, 1000)
 
     # print(f(a), f(a) < 1e-2)
+    
+    f = lambda x: (x**3 - 5*x - 9)
+    print(secant(f, 2, 5, 1e-4))

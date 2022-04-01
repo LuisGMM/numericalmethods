@@ -3,6 +3,7 @@ from typing import Callable
 
 import numpy as np
 
+from roots import newton
 
 
 def euler_explicit(f:'Callable[float, float]', y0:float, t0:float, t:float, h:float)-> np.ndarray:
@@ -193,5 +194,32 @@ def euler_implicit(f:'Callable[float, float]', y0:float, t0:float, t:float, h:fl
 
         g = lambda y: u[i] + u[i+1] + h*f(y, t_[i+1])
         u[i+1] = newton(*args, f=g, x0=u[i], **kwargs)
+
+    return u
+
+# TODO: To be validated 
+def heun(f:'Callable[float, float]', y0:float, t0:float, t:float, h:float)-> np.ndarray:
+    """Computes Heun's method to solve ODEs.
+
+    Args:
+        f (Callable[float, float]): Function depending on y and t in that order.
+            Equivalent to f(y,t).
+        y0 (float): Initial value of the answer.
+            Equivalent to y(t0).
+        t0 (float): Initial time.
+        t (float): Final time.
+        h (float): Separation between the points of the interval.
+    
+    Returns:
+        np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, t-h, t].    
+    """
+    t_ = np.arange(t0, t0+t, h)
+    N = len(t_)
+
+    u = np.zeros_like(t_)
+    u[0] = y0
+ 
+    for i in range(N-1):
+        u[i+1] = u[i] + h/2 * ( f(u[i]+h*f(u[i], t_[i]), t_[i+1]) + f(u[i], t_[i]) )
 
     return u

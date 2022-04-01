@@ -73,7 +73,34 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
 
 
 def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000) -> np.ndarray:
-  
+    """Computes Bisection method to find roots f(x)=0. 
+
+    If there are no roots in the interval [a, b], the method will throw an exception. 
+    This is checked using bolzano's theorem (If f(a)*f(b) >= 0).
+    
+    Args:
+        f (Callable[float]): Function of which we want to find roots f(x)=0.
+        a (float): Lower bound of the interval.
+        b (float): Upper bound of the interval.
+        Nmax (int): Maximum number of iterations. Defaults to 100_000
+        err (float): Tolerance of the result. It assures that the root is in [x-err, x+err]. #TODO: Is this the interval?
+
+    Raises:
+        ValueError: If, according to Bolzano's theorem, there cannot be roots in [a, b]. 
+        ValueError: If the method, being at least one root in [a, b], fails to to compute the root.
+    
+    Returns:
+        np.ndarray: _description_
+    
+    Examples:
+        >>> f = lambda x: (x**2 - 1)
+        >>> bisection(f, -0.5, 2, 1e-10)
+        2.9103830456733704e-11
+        >>> bisection(f, -0.5, 2, 1e-10, 100)
+        ValueError: Could not find a root in the interval [-0.5, 2] with tolerance 1e-10 in 5 iterations.
+        >>> bisection(f, 5, 20, 1e-7)
+        ValueError: f(a)*f(b)=9576 <0.   No roots in this interval.
+    """    
     if f(a)*f(b) >= 0:
         raise ValueError(f'{f(a)*f(b)=} <0. \t No roots in this interval.')
     

@@ -2,6 +2,8 @@ import sys
 import warnings
 from typing import Callable
 
+import numpy as np
+
 from exceptions import InadequateArgsCombination
 
 # TODO: Shield all methods. 
@@ -68,3 +70,7 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
             return iter_dict[iter+1]
         
         iter += 1
+
+
+def bisection(f:'Callable[float, float]', y0:float, t0:float, t:float, h:float) -> np.ndarray:
+    raise NotImplementedError()

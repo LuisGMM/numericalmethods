@@ -163,7 +163,8 @@ def chord(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000, 
 
     raise ValueError(f'Could not find a root in the interval [{a}, {b}] with tolerance {err} in {Nmax} iterations.')
 
-
+def secant(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000, x0:float = None) -> float:
+    raise NotImplementedError()
 
 if __name__ == '__main__':
     pass

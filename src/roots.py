@@ -2,7 +2,7 @@ import sys
 import warnings
 from typing import Callable
 
-
+from exceptions import InadequateArgsCombination
 
 # TODO: Shield all methods. 
 # TODO: Adequately use logging and warnings. 
@@ -52,7 +52,7 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
         iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / dev(x=iter_dict[iter_idx], f=f)
     
     else:
-        raise type('InadequateArgsCombination', (Exception,), {})('Cannot compute Newton s method with the combination of arguments given. Check the valid combinations.')
+        raise InadequateArgsCombination('Cannot compute Newton s method with the combination of arguments given. Check the valid combinations.')
 
     iter, iter_dict = 0, {0:x0}
     limit = sys.getrecursionlimit()

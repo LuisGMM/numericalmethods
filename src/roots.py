@@ -72,7 +72,7 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
         iter += 1
 
 
-def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000) -> np.ndarray:
+def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000) -> float:
     """Computes Bisection method to find roots f(x)=0. 
 
     If there are no roots in the interval [a, b], the method will throw an exception. 
@@ -90,7 +90,7 @@ def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_0
         ValueError: If the method, being at least one root in [a, b], fails to to compute the root.
     
     Returns:
-        np.ndarray: _description_
+        float: Root x such as f(x)=0 with a tolerance err.
     
     Examples:
         >>> f = lambda x: (x**2 - 1)
@@ -124,6 +124,7 @@ def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_0
             return f_m_n
     
     raise ValueError(f'Could not find a root in the interval [{a}, {b}] with tolerance {err} in {N} iterations.')
+
 
 
 

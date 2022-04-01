@@ -186,6 +186,11 @@ def secant(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000,
     
     Returns:
         float: Root x such as f(x)=0 with a tolerance err.
+    
+    Examples:
+        >>> f = lambda x: (x**3 - 5*x - 9)
+        >>> secant(f, 2, 5, 1e-4)
+        2.8551984513616424
     """
     if f(a)*f(b) >= 0:
         raise ValueError(f'{f(a)*f(b)=} <0. \t No roots in this interval.')
@@ -217,6 +222,3 @@ if __name__ == '__main__':
     # a = chord(f, 0.5, 2, 1e-2, 1000)
 
     # print(f(a), f(a) < 1e-2)
-    
-    f = lambda x: (x**3 - 5*x - 9)
-    print(secant(f, 2, 5, 1e-4))

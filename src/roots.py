@@ -72,5 +72,33 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
         iter += 1
 
 
-def bisection(f:'Callable[float, float]', y0:float, t0:float, t:float, h:float) -> np.ndarray:
-    raise NotImplementedError()
+def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000) -> np.ndarray:
+  
+    if f(a)*f(b) >= 0:
+        raise ValueError(f'{f(a)*f(b)=} <0. \t No roots in this interval.')
+    
+    N = min(Nmax, np.ceil(np.log((b-a)/err) / np.log(2) - 1))
+    a_n = a
+    b_n = b
+    m_n = (a_n + b_n)/2
+    f_m_n = f(m_n)
+    for _ in np.arange(1,N+1):
+        
+        if f(a_n)*f_m_n < 0:
+            b_n = m_n    
+
+        elif f(b_n)*f_m_n < 0:
+            a_n = m_n
+
+        m_n = (a_n + b_n)/2
+        f_m_n = f(m_n)
+
+        if abs(f_m_n) <=  err: 
+            return f_m_n
+    
+    raise ValueError(f'Could not find a root in the interval [{a}, {b}] with tolerance {err} in {N} iterations.')
+
+
+
+if __name__ == '__main__':
+    pass

@@ -126,6 +126,8 @@ def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_0
     raise ValueError(f'Could not find a root in the interval [{a}, {b}] with tolerance {err} in {N} iterations.')
 
 
+def chord(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000) -> np.ndarray:
+    raise NotImplementedError()
 
 
 if __name__ == '__main__':

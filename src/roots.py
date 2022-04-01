@@ -138,6 +138,7 @@ def chord(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000, 
         b (float): Upper bound of the interval.
         err (float): Tolerance of the result. It assures that the root is in [x-err, x+err]. #TODO: Is this the interval?
         Nmax (int): Maximum number of iterations. Defaults to 100_000.
+        x0 (float): Initial guess for the root. Defaults (a+b)/2.
 
     Raises:
         ValueError: If, according to Bolzano's theorem, there cannot be roots in [a, b]. 
@@ -164,7 +165,28 @@ def chord(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000, 
     raise ValueError(f'Could not find a root in the interval [{a}, {b}] with tolerance {err} in {Nmax} iterations.')
 
 def secant(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000, x0:float = None) -> float:
+    """Computes Secant method to find roots :math:`f(x)=0`. 
+
+    If there are no roots in the interval :math:`[a, b]`, the method will throw an exception. 
+    This is checked using bolzano's theorem (If :math:`f(a)*f(b) >= 0`).
     
+    To computes the first iteration, it computes the previous value as :math: `a-1`
+
+    Args:
+        f (Callable[float]): Function of which we want to find roots :math:`f(x)=0`.
+        a (float): Lower bound of the interval.
+        b (float): Upper bound of the interval.
+        err (float): Tolerance of the result. It assures that the root is in :math:`[x-err, x+err]`. #TODO: Is this the interval?
+        Nmax (int): Maximum number of iterations. Defaults to 100_000.
+        x0 (float): Initial guess for the root. Defaults :math:`(a+b)/2`.
+
+    Raises:
+        ValueError: If, according to Bolzano's theorem, there cannot be roots in :math:`[a, b]`. 
+        ValueError: If the method, being at least one root in :math:`[a, b]`, fails to to compute the root.
+    
+    Returns:
+        float: Root x such as f(x)=0 with a tolerance err.
+    """
     if f(a)*f(b) >= 0:
         raise ValueError(f'{f(a)*f(b)=} <0. \t No roots in this interval.')
     

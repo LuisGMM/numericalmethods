@@ -72,7 +72,21 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
         iter += 1
 
 def newton_systems(f:'Callable[float, ...]', J:np.ndarray, vec0:np.ndarray, err:float)-> np.ndarray:
-    raise NotImplementedError()
+
+    iter, iter_dict = 0, {0:vec0}
+    limit = sys.getrecursionlimit()
+
+    while True:
+        if iter + 10 >= limit:
+            warnings.warn(f'Iteration limit ({limit}) reached without finding any root. Try with other initial guess or changing the recursion limit. Maybe there are no roots.')
+            return 
+        
+        iter_dict[iter+1] = iter_dict[iter] - np.matmul(np.linalg.inv(J(*iter_dict[iter])), f(*iter_dict[iter]))
+        
+        if abs(iter_dict[iter+1] - iter_dict[iter]) < err:
+            return iter_dict[iter+1]
+        
+        iter += 1
 
 
 def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000) -> float:

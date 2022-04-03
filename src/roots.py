@@ -83,7 +83,7 @@ def newton_systems(f:'Callable[float, ...]', J:np.ndarray, vec0:np.ndarray, err:
         
         iter_dict[iter+1] = iter_dict[iter] - np.matmul(np.linalg.inv(J(*iter_dict[iter])), f(*iter_dict[iter]))
         
-        if abs(iter_dict[iter+1] - iter_dict[iter]) < err:
+        if np.all(abs(iter_dict[iter+1] - iter_dict[iter]) < err):
             return iter_dict[iter+1]
         
         iter += 1
@@ -239,3 +239,4 @@ if __name__ == '__main__':
     # a = chord(f, 0.5, 2, 1e-2, 1000)
 
     # print(f(a), f(a) < 1e-2)
+

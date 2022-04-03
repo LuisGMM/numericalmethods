@@ -71,6 +71,9 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
         
         iter += 1
 
+def newton_systems():
+    raise NotImplementedError()
+
 
 def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000) -> float:
     """Computes Bisection method to find roots f(x)=0. 

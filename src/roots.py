@@ -85,8 +85,9 @@ def newton_systems(f:'Callable[float, ...]', J:'Callable[float, ...]', vec0:np.n
         np.ndarray|None: Root of the function or None if the algorithm reaches its recursion limit.
     
     Examples: 
-        Solve :math: `x^2+y^2-25=0  
-                      x^2-y-2=0`
+        Solve 
+        ..math:: 
+            `x^2+y^2-25=0  \\ x-y-2=0`
         With an adequate initial guess.
 
         >>> f = lambda x, y: [x**2 + y**2 -25, 

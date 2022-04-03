@@ -240,3 +240,11 @@ if __name__ == '__main__':
 
     # print(f(a), f(a) < 1e-2)
 
+    f = lambda x, y: [x**2 + y**2 -25, x - y - 2]
+
+    f_dev = lambda x, y: [[2*x, 2*y], 
+                          [1, -1]]
+    
+    ans = newton_systems(f, f_dev, [10,0], 1e-19)
+
+    print(f(*ans))

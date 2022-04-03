@@ -127,7 +127,7 @@ def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_0
 
 # TODO: Not validated
 def chord(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000, x0:float = None) -> float:
-    """Computes Bisection method to find roots f(x)=0. 
+    """Computes Chord method to find roots f(x)=0. 
 
     If there are no roots in the interval :math:`[a, b]`, the method will throw an exception. 
     This is checked using bolzano's theorem (If :math:`f(a)*f(b) >= 0`).

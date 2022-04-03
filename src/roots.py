@@ -71,8 +71,39 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
         
         iter += 1
 
-def newton_systems(f:'Callable[float, ...]', J:np.ndarray, vec0:np.ndarray, err:float)-> np.ndarray:
 
+def newton_systems(f:'Callable[float, ...]', J:'Callable[float, ...]', vec0:np.ndarray, err:float)-> np.ndarray:
+    """Solves systems of linear and nonlinear equations using the Newton method.
+
+    Args:
+        f (Callable[float, ...]): Vector function to find its roots.    
+        J (Callable[float, ...]): Jacobian of f.
+        vec0 (np.ndarray): Initial guess of the solution. Avoid using guesses that make J a singular matrix (:math:`|J(vec0)| = 0`).
+        err (float): Stopping criteria for the algorithm. Minimum difference between the to last consecutive solutions.
+
+    Returns:
+        np.ndarray|None: Root of the function or None if the algorithm reaches its recursion limit.
+    
+    Examples: 
+        Solve :math: `x^2+y^2-25=0  
+                      x^2-y-2=0`
+        With an adequate initial guess.
+
+        >>> f = lambda x, y: [x**2 + y**2 -25, 
+                              x - y - 2]
+        >>> J = lambda x, y: [[2*x, 2*y], 
+                              [1, -1]]
+        >>> err = 1e-10
+        >>> vec0 = [0, 0] #Invalid initial guess.
+        >>> newton_systems(f, J, vec0, err)
+        Raises numpy.linalg.LinAlgError: Singular matrix
+        >>> vec0 = [1, 0] #Valid initial guess.
+        >>> roots = newton_systems(f, J, vec0, err)
+        >>> roots
+        [4.39116499 2.39116499]
+        >>> f(*roots)
+        [-3.552713678800501e-15, -4.440892098500626e-16]  
+    """
     iter, iter_dict = 0, {0:vec0}
     limit = sys.getrecursionlimit()
 
@@ -245,6 +276,9 @@ if __name__ == '__main__':
     f_dev = lambda x, y: [[2*x, 2*y], 
                           [1, -1]]
     
-    ans = newton_systems(f, f_dev, [10,0], 1e-19)
+    vec0 = [1, 0]
+    err = 1e-10
 
+    ans = newton_systems(f, f_dev, vec0, err)
+    print(ans)
     print(f(*ans))

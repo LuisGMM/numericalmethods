@@ -22,7 +22,7 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
 
     Args:
         err (float): Desired error of the method.
-        f_dev (Callable[float], optional): Analytical function to find its roots. Its input is the point to be evaluated in. Defaults to None.
+        f (Callable[float], optional): Analytical function to find its roots. Its input is the point to be evaluated in. Defaults to None.
         f_dev (Callable[float], optional): Analytical derivative of the function. Its input is the point to be evaluated in. Defaults to None.
         composite (Callable[Callable, float, float, float], optional): Integration method to compute the integral of `f_dev` and find its roots. 
             It should be `composite_trapezoid` or `composite_simpson` methods. Defaults to None.

@@ -266,19 +266,3 @@ def secant(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000,
 
 if __name__ == '__main__':
     pass
-    # f = lambda x: (x**2 - 1)
-    # a = chord(f, 0.5, 2, 1e-2, 1000)
-
-    # print(f(a), f(a) < 1e-2)
-
-    f = lambda x, y: [x**2 + y**2 -25, x - y - 2]
-
-    f_dev = lambda x, y: [[2*x, 2*y], 
-                          [1, -1]]
-    
-    vec0 = [1, 0]
-    err = 1e-10
-
-    ans = newton_systems(f, f_dev, vec0, err)
-    print(ans)
-    print(f(*ans))

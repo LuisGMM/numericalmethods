@@ -41,7 +41,7 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
     if (f or composite) and f_dev:
         if f and composite:
             warnings.warn('`f`, `f_dev` and `composite` args detected. Only `f` and `f_dev` will be used for sake of precision.') 
-            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
+            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])  # TODO: probably need to unpack iterdict with *
 
         elif composite:
             iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - (composite(f_dev, x0, iter_dict[iter_idx], 100_000) + c) / f_dev(iter_dict[iter_idx])
@@ -71,7 +71,7 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
         
         iter += 1
 
-def newton_systems():
+def newton_systems(f:'Callable[float, ...]', J:np.ndarray, vec0:np.ndarray, err:float)-> np.ndarray:
     raise NotImplementedError()
 
 
@@ -105,7 +105,7 @@ def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_0
         ValueError: f(a)*f(b)=9576 <0.   No roots in this interval.
     """    
     if f(a)*f(b) >= 0:
-        raise ValueError(f'{f(a)*f(b)=} <0. \t No roots in this interval.')
+        raise ValueError(f'f(a)*f(b) = {f(a)*f(b)} <0. \t No roots in this interval.')
     
     N = int(min(Nmax, np.ceil(np.log((b-a)/err) / np.log(2) - 1))) # What is this?
     a_n = a
@@ -151,7 +151,7 @@ def chord(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000, 
         float: Root x such as f(x)=0 with a tolerance err.
     """
     if f(a)*f(b) >= 0:
-        raise ValueError(f'{f(a)*f(b)=} <0. \t No roots in this interval.')
+        raise ValueError(f'f(a)*f(b) = {f(a)*f(b)} <0. \t No roots in this interval.')
     
     x0_ = x0 if x0 is not None else (a+b)/2 # TODO: Check if there is a better initial guess
     f_x_n = f(x0_)
@@ -196,7 +196,7 @@ def secant(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000,
         2.8551984513616424
     """
     if f(a)*f(b) >= 0:
-        raise ValueError(f'{f(a)*f(b)=} <0. \t No roots in this interval.')
+        raise ValueError(f'f(a)*f(b) = {f(a)*f(b)} <0. \t No roots in this interval.')
     
     x_n = x0 if x0 is not None else (a+b)/2 # TODO: Check if there is a better initial guess
     x_previous = a - 1 # TODO: Check if there is a better initial guess

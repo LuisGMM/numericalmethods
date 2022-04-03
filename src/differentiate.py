@@ -11,3 +11,6 @@ def forward(order:int, f:'function', x:float, h:float) -> float:
 
 def backward(order:int, f:'function', x:float, h:float) -> float: 
     raise NotImplementedError()
+
+def central(order:int, f:'function', x:float, h:float) -> float: 
+    raise NotImplementedError()

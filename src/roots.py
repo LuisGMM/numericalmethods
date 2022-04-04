@@ -273,4 +273,15 @@ def secant(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000,
     
 
 if __name__ == '__main__':
-    pass
+    
+    from integrate import composite_simpson, composite_trapezoid
+
+    f_dev = lambda x: 1 / np.sqrt(2*np.pi) * np.exp(-x**2 / 2)
+
+
+    ERR = 1e-5
+    p0 = 0.5
+    x0 = 0
+    C = -0.45
+    print(newton(err=ERR, integrator=composite_simpson, f_dev=f_dev, c=C, x0=x0))
+    print(newton(err=ERR, integrator=composite_simpson, f_dev=f_dev, c=C, x0=x0))

@@ -42,9 +42,8 @@ def composite_simpson(f_:'Callable[float]', a:float, b:float, n:float)-> float:
     x = np.linspace(a, b, n+1)
     f = f_(x)
     h = (b - a) / (n)
-    integral_value = (h/3) * ( f[0] + 2*sum(f[2:n-1:2]) + 4*sum(f[1:n:2]) + f[n] )
     
-    return integral_value
+    return (h/3) * ( f[0] + 2*sum(f[2:n-1:2]) + 4*sum(f[1:n:2]) + f[n] )
 
 
 def euler_explicit(f:'Callable[float, float]', y0:float, t0:float, t:float, h:float)-> np.ndarray:

@@ -15,7 +15,7 @@ from exceptions import InadequateArgsCombination
 
 def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None,
     integrator:'Callable[Callable, float, float, float]' = None, differentiator:'Callable[int, Callable, float, float, bool]' = None, *, 
-    c:float = 0, x0:float = 0, h_err:float = 1e-4) -> float:
+    c:float = 0, x0:float = 0, n:int = 100_000, h_err:float = 1e-4) -> float:
     """Newton's method to find roots of a function.
     
     If no `f` is given but `f_dev` and `integrator` are, it will compute the roots of the integral of `f_dev` with integration constant c.
@@ -42,7 +42,7 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
             iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
 
         elif integrator:
-            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - (integrator(f_dev, x0, iter_dict[iter_idx], 100_000) + c) / f_dev(iter_dict[iter_idx])
+            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - (integrator(f_dev, x0, iter_dict[iter_idx], n) + c) / f_dev(iter_dict[iter_idx])
 
         else:
             iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])

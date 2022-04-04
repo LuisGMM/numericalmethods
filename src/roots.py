@@ -22,7 +22,7 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
 
     Args:
         err (float): Desired error of the method.
-        f_dev (Callable[float], optional): Analytical function to find its roots. Its input is the point to be evaluated in. Defaults to None.
+        f (Callable[float], optional): Analytical function to find its roots. Its input is the point to be evaluated in. Defaults to None.
         f_dev (Callable[float], optional): Analytical derivative of the function. Its input is the point to be evaluated in. Defaults to None.
         integrator (Callable[Callable, float, float, float], optional): Integration method to compute the integral of `f_dev` and find its roots. 
             It should be `composite_trapezoid` or `composite_simpson` methods. Defaults to None.
@@ -71,6 +71,55 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
         
         iter += 1
 
+# TODO: Raise exception if the determinant of jacobian of the initial condition is 0 (Singular matrix)
+def newton_systems(f:'Callable[float, ...]', J:'Callable[float, ...]', vec0:np.ndarray, err:float)-> np.ndarray:
+    """Solves systems of linear and nonlinear equations using the Newton method.
+
+    Args:
+        f (Callable[float, ...]): Vector function to find its roots.    
+        J (Callable[float, ...]): Jacobian of f.
+        vec0 (np.ndarray): Initial guess of the solution. Avoid using guesses that make J a singular matrix (:math:`|J(vec0)| = 0`).
+        err (float): Stopping criteria for the algorithm. Minimum difference between the to last consecutive solutions.
+
+    Returns:
+        np.ndarray|None: Root of the function or None if the algorithm reaches its recursion limit.
+    
+    Examples: 
+        Solve 
+        ..math:: 
+            `x^2+y^2-25=0  \\ x-y-2=0`
+        With an adequate initial guess.
+
+        >>> f = lambda x, y: [x**2 + y**2 -25, 
+                              x - y - 2]
+        >>> J = lambda x, y: [[2*x, 2*y], 
+                              [1, -1]]
+        >>> err = 1e-10
+        >>> vec0 = [0, 0] #Invalid initial guess.
+        >>> newton_systems(f, J, vec0, err)
+        Raises numpy.linalg.LinAlgError: Singular matrix
+        >>> vec0 = [1, 0] #Valid initial guess.
+        >>> roots = newton_systems(f, J, vec0, err)
+        >>> roots
+        [4.39116499 2.39116499]
+        >>> f(*roots)
+        [-3.552713678800501e-15, -4.440892098500626e-16]  
+    """
+    iter, iter_dict = 0, {0:vec0}
+    limit = sys.getrecursionlimit()
+
+    while True:
+        if iter + 10 >= limit:
+            warnings.warn(f'Iteration limit ({limit}) reached without finding any root. Try with other initial guess or changing the recursion limit. Maybe there are no roots.')
+            return 
+        
+        iter_dict[iter+1] = iter_dict[iter] - np.matmul(np.linalg.inv(J(*iter_dict[iter])), f(*iter_dict[iter]))
+        
+        if np.all(abs(iter_dict[iter+1] - iter_dict[iter]) < err):
+            return iter_dict[iter+1]
+        
+        iter += 1
+
 
 def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000) -> float:
     """Computes Bisection method to find roots f(x)=0. 
@@ -102,7 +151,7 @@ def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_0
         ValueError: f(a)*f(b)=9576 <0.   No roots in this interval.
     """    
     if f(a)*f(b) >= 0:
-        raise ValueError(f'{f(a)*f(b)=} <0. \t No roots in this interval.')
+        raise ValueError(f'f(a)*f(b) = {f(a)*f(b)} <0. \t No roots in this interval.')
     
     N = int(min(Nmax, np.ceil(np.log((b-a)/err) / np.log(2) - 1))) # What is this?
     a_n = a
@@ -127,7 +176,7 @@ def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_0
 
 # TODO: Not validated
 def chord(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000, x0:float = None) -> float:
-    """Computes Bisection method to find roots f(x)=0. 
+    """Computes Chord method to find roots f(x)=0. 
 
     If there are no roots in the interval :math:`[a, b]`, the method will throw an exception. 
     This is checked using bolzano's theorem (If :math:`f(a)*f(b) >= 0`).
@@ -148,7 +197,7 @@ def chord(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000, 
         float: Root x such as f(x)=0 with a tolerance err.
     """
     if f(a)*f(b) >= 0:
-        raise ValueError(f'{f(a)*f(b)=} <0. \t No roots in this interval.')
+        raise ValueError(f'f(a)*f(b) = {f(a)*f(b)} <0. \t No roots in this interval.')
     
     x0_ = x0 if x0 is not None else (a+b)/2 # TODO: Check if there is a better initial guess
     f_x_n = f(x0_)
@@ -193,7 +242,7 @@ def secant(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000,
         2.8551984513616424
     """
     if f(a)*f(b) >= 0:
-        raise ValueError(f'{f(a)*f(b)=} <0. \t No roots in this interval.')
+        raise ValueError(f'f(a)*f(b) = {f(a)*f(b)} <0. \t No roots in this interval.')
     
     x_n = x0 if x0 is not None else (a+b)/2 # TODO: Check if there is a better initial guess
     x_previous = a - 1 # TODO: Check if there is a better initial guess
@@ -218,7 +267,3 @@ def secant(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000,
 
 if __name__ == '__main__':
     pass
-    # f = lambda x: (x**2 - 1)
-    # a = chord(f, 0.5, 2, 1e-2, 1000)
-
-    # print(f(a), f(a) < 1e-2)

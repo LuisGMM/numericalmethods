@@ -41,6 +41,20 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
 
     Returns:
         float|None: Root of the function or None if the algorithm reaches its recursion limit.
+    
+    Examples:
+        :math: `$$\int_{0}^{x}\frac{1}{\sqrt{2\pi}}e^{-t^2/2}dt=0.45$$`
+
+        can be solved for x with :math: `$$f(x)=\int_{0}^{x}\frac{1}{\sqrt{2\pi}}e^{-t^2/2}dt-0.45$$`
+
+        and :math: `$$f'(x)=\frac{1}{\sqrt{2\pi}}e^{-x^2/2}.$$`
+
+        To evaluate f(x) at the approximation to the root :math: `$p_k$` we need a quadrature formula to approximate
+            :math: `$$\int_{0}^{p_k}\frac{1}{\sqrt{2\pi}}e^{-t^2/2}dt$$`
+        
+        Find a solution to :math:`$f(x) = 0$` accurate to within :math:`$10^{-5}$` using Newton\'s method with :math:`$p_0 = 0.5$`
+        and the Composite Simpson\'s rule.
+        
     """    
     if (f or integrator) and f_dev:
         if f and integrator:

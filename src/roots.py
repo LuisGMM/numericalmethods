@@ -27,6 +27,7 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
         f_dev (Callable[float], optional): Analytical derivative of the function. Its input is the point to be evaluated in. Defaults to None.
         integrator (Callable[Callable, float, float, float], optional): Integration method to compute the integral of `f_dev` and find its roots. 
             It should be `composite_trapezoid` or `composite_simpson` methods. Defaults to None.
+        differentiator (Callable[int, Callable, float, float, bool]): 
         c (float, optional): Integration constant of the integral of f_dev. Defaults to 0.
         x0 (float, optional): Initial guess of the root. 
             Note that an inadequate first guess could lead to undesired outputs such as no roots or undesired roots.

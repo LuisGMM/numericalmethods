@@ -50,6 +50,19 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
         else:
             iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
 
+    elif (f_dev or differentiator) and f:
+        
+        if f_dev and differentiator:
+            warnings.warn('`f`, `f_dev` and `differentiator` args detected. Only `f` and `f_dev` will be used for sake of precision.') 
+            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
+
+        elif differentiator:
+            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / differentiator(1, f, iter_dict[iter_idx], h_err, True) # TODO: Is order arg right?
+
+        else:
+            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
+
+
     elif f and f_dev is None:
         warnings.warn(f'`f_dev` was not given. It will be computed using the derivative definition with `h`={h_err} .') 
         iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / dev(x=iter_dict[iter_idx], f=f)

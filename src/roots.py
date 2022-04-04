@@ -36,6 +36,9 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
         n (int, optional): The number of parts the interval of the integrator method is divided into. Defaults to 100_000.
         h_err (float, optional): Finite approximation of 0 to use in the calculation of `f_dev` by its mathematical definition. Defaults to 1e-4.
 
+    Raises:
+        InadequateArgsCombination: If the combination of arguments is not valid.
+
     Returns:
         float|None: Root of the function or None if the algorithm reaches its recursion limit.
     """    

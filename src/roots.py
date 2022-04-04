@@ -14,7 +14,7 @@ from exceptions import InadequateArgsCombination
 # TODO: Implement testcases. 
 
 def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None,
-    integrator:'Callable[Callable, float, float, float]' = None, differentiator:'Callable[Callable, float, float, float]' = None,
+    integrator:'Callable[Callable, float, float, float]' = None, differentiator:'Callable[int, Callable, float, float, bool]' = None, *, 
     c:float = 0, x0:float = 0, h_err:float = 1e-4) -> float:
     """Newton's method to find roots of a function.
     

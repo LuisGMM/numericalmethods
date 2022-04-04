@@ -14,7 +14,8 @@ from exceptions import InadequateArgsCombination
 # TODO: Implement testcases. 
 
 def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None,
-    integrator:'Callable[Callable, float, float, float]' = None, c:float = 0, x0:float = 0, h_err:float = 1e-4) -> float:
+    integrator:'Callable[Callable, float, float, float]' = None, differentiator:'Callable[Callable, float, float, float]' = None,
+    c:float = 0, x0:float = 0, h_err:float = 1e-4) -> float:
     """Newton's method to find roots of a function.
     
     If no `f` is given but `f_dev` and `integrator` are, it will compute the roots of the integral of `f_dev` with integration constant c.
@@ -49,7 +50,7 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
         else:
             iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
 
-    elif f and f_dev == None:
+    elif f and f_dev is None:
         warnings.warn(f'`f_dev` was not given. It will be computed using the derivative definition with `h`={h_err} .') 
         iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / dev(x=iter_dict[iter_idx], f=f)
     

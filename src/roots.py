@@ -36,9 +36,6 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
     Returns:
         float|None: Root of the function or None if the algorithm reaches its recursion limit.
     """    
-    def dev(x:float, f:'Callable[float]' = f, h_err:float = h_err)-> float:
-        return ( f(x+h_err) - f(x) ) / h_err 
-
     if (f or integrator) and f_dev:
         if f and integrator:
             warnings.warn('`f`, `f_dev` and `integrator` args detected. Only `f` and `f_dev` will be used for sake of precision.') 

@@ -59,13 +59,8 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
         else:
             iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
 
-
-    elif f and f_dev is None:
-        warnings.warn(f'`f_dev` was not given. It will be computed using the derivative definition with `h`={h_err} .') 
-        iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / dev(x=iter_dict[iter_idx], f=f)
-    
     else:
-        raise InadequateArgsCombination('Cannot compute Newton s method with the combination of arguments given. Check the valid combinations.')
+        raise InadequateArgsCombination('Cannot compute Newton\'s method with the combination of arguments given. Check the valid combinations.')
 
     iter, iter_dict = 0, {0:x0}
     limit = sys.getrecursionlimit()

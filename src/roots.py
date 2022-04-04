@@ -33,6 +33,7 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
         x0 (float, optional): Initial guess of the root. 
             Note that an inadequate first guess could lead to undesired outputs such as no roots or undesired roots.
             Defaults to 0.
+        n (int, optional): The number of parts the interval of the integrator method is divided into. Defaults to 100_000.
         h_err (float, optional): Finite approximation of 0 to use in the calculation of `f_dev` by its mathematical definition. Defaults to 1e-4.
 
     Returns:

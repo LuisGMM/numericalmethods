@@ -14,17 +14,17 @@ from exceptions import InadequateArgsCombination
 # TODO: Implement testcases. 
 
 def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None,
-    composite:'Callable[Callable, float, float, float]' = None,  c:float = 0, x0:float = 0, h_err:float = 1e-4) -> float:
+    integrator:'Callable[Callable, float, float, float]' = None,  c:float = 0, x0:float = 0, h_err:float = 1e-4) -> float:
     """Newton's method to find roots of a function.
     
-    If no `f` is given but `f_dev` and `composite` are, it will compute the roots of the integral of `f_dev` with integration constant c.
+    If no `f` is given but `f_dev` and `integrator` are, it will compute the roots of the integral of `f_dev` with integration constant c.
     If `f_dev` is not given, it will be computed from `f` with the mathematical definition of a derivative.
 
     Args:
         err (float): Desired error of the method.
         f_dev (Callable[float], optional): Analytical function to find its roots. Its input is the point to be evaluated in. Defaults to None.
         f_dev (Callable[float], optional): Analytical derivative of the function. Its input is the point to be evaluated in. Defaults to None.
-        composite (Callable[Callable, float, float, float], optional): Integration method to compute the integral of `f_dev` and find its roots. 
+        integrator (Callable[Callable, float, float, float], optional): Integration method to compute the integral of `f_dev` and find its roots. 
             It should be `composite_trapezoid` or `composite_simpson` methods. Defaults to None.
         c (float, optional): Integration constant of the integral of f_dev. Defaults to 0.
         x0 (float, optional): Initial guess of the root. 
@@ -38,13 +38,13 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
     def dev(x:float, f:'Callable[float]' = f, h_err:float = h_err)-> float:
         return ( f(x+h_err) - f(x) ) / h_err 
 
-    if (f or composite) and f_dev:
-        if f and composite:
-            warnings.warn('`f`, `f_dev` and `composite` args detected. Only `f` and `f_dev` will be used for sake of precision.') 
+    if (f or integrator) and f_dev:
+        if f and integrator:
+            warnings.warn('`f`, `f_dev` and `integrator` args detected. Only `f` and `f_dev` will be used for sake of precision.') 
             iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
 
-        elif composite:
-            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - (composite(f_dev, x0, iter_dict[iter_idx], 100_000) + c) / f_dev(iter_dict[iter_idx])
+        elif integrator:
+            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - (integrator(f_dev, x0, iter_dict[iter_idx], 100_000) + c) / f_dev(iter_dict[iter_idx])
 
         else:
             iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])

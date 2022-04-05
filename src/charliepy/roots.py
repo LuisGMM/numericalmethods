@@ -6,18 +6,19 @@ import numpy as np
 
 from charliepy.exceptions import InadequateArgsCombination
 
-# TODO: Shield all methods. 
-# TODO: Adequately use logging and warnings. 
-# TODO: Implement euler_explicit_systems with explicit dependance on time. 
+# TODO: Shield all methods.
+# TODO: Adequately use logging and warnings.
+# TODO: Implement euler_explicit_systems with explicit dependance on time.
 # TODO: Implement newton for systems.
 # TODO: Improve docstrings; implement examples.
-# TODO: Implement testcases. 
+# TODO: Implement testcases.
 
-def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None,
-    integrator:'Callable[Callable, float, float, float]' = None, differentiator:'Callable[int, Callable, float, float, bool]' = None, *, 
-    c:float = 0, x0:float = 0, n:int = 100_000, h_err:float = 1e-4) -> float:
+
+def newton(err: float, f: 'Callable[float]' = None, f_dev: 'Callable[float]' = None,
+           integrator: 'Callable[Callable, float, float, float]' = None, differentiator: 'Callable[int, Callable, float, float, bool]' = None, *,
+           c: float = 0, x0: float = 0, n: int = 100_000, h_err: float = 1e-4) -> float:
     """Newton's method to find roots of a function.
-    
+
     If no `f` is given but `f_dev` and `integrator` are, it will compute the roots of the integral of `f_dev` with integration constant c.
     If `f_dev` is not given, it will be computed from `f` with the mathematical definition of a derivative.
 
@@ -41,7 +42,7 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
 
     Returns:
         float|None: Root of the function or None if the algorithm reaches its recursion limit.
-    
+
     Examples:
         :math: `$$\int_{0}^{x}\frac{1}{\sqrt{2\pi}}e^{-t^2/2}dt=0.45$$`
 
@@ -51,7 +52,7 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
 
         To evaluate f(x) at the approximation to the root :math: `$p_k$` we need a quadrature formula to approximate
             :math: `$$\int_{0}^{p_k}\frac{1}{\sqrt{2\pi}}e^{-t^2/2}dt$$`
-        
+
         Find a solution to :math:`$f(x) = 0$` accurate to within :math:`$10^{-5}$` using Newton\'s method with :math:`$p_0 = 0.5$`
         and the Composite Simpson\'s rule.
 
@@ -62,50 +63,54 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
         >>> ans = newton(composite_simpson, f_dev, C, ERR, x0)
         >>> ans
         1.6448536269514884
-    """    
+    """
     if (f or integrator) and f_dev:
         if f and integrator:
-            warnings.warn('`f`, `f_dev` and `integrator` args detected. Only `f` and `f_dev` will be used for sake of precision.') 
-            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
+            warnings.warn('`f`, `f_dev` and `integrator` args detected. Only `f` and `f_dev` will be used for sake of precision.')
+            def iteration(iter_idx, iter_dict): return iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
 
         elif integrator:
-            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - (integrator(f_dev, 0, iter_dict[iter_idx], n) + c) / f_dev(iter_dict[iter_idx])
+            def iteration(iter_idx, iter_dict): return iter_dict[iter_idx] - (integrator(f_dev, 0, iter_dict[iter_idx], n) + c) / f_dev(iter_dict[iter_idx])
 
         else:
-            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
+            def iteration(iter_idx, iter_dict): return iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
 
     elif (f_dev or differentiator) and f:
-        
+
         if f_dev and differentiator:
-            warnings.warn('`f`, `f_dev` and `differentiator` args detected. Only `f` and `f_dev` will be used for sake of precision.') 
-            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
+            warnings.warn('`f`, `f_dev` and `differentiator` args detected. Only `f` and `f_dev` will be used for sake of precision.')
+            def iteration(iter_idx, iter_dict): return iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
 
         elif differentiator:
-            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / differentiator(1, f, iter_dict[iter_idx], h_err, True) # TODO: Is order arg right?
+            def iteration(iter_idx, iter_dict): return iter_dict[iter_idx] - f(iter_dict[iter_idx]) / \
+                differentiator(1, f, iter_dict[iter_idx], h_err, True)  # TODO: Is order arg right?
 
         else:
-            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
+            def iteration(iter_idx, iter_dict): return iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
 
     else:
         raise InadequateArgsCombination('Cannot compute Newton\'s method with the combination of arguments given. Check the valid combinations.')
 
-    iter, iter_dict = 0, {0:x0}
+    iter, iter_dict = 0, {0: x0}
     limit = sys.getrecursionlimit()
 
     while True:
         if iter + 10 >= limit:
-            warnings.warn(f'Iteration limit ({limit}) reached without finding any root. Try with other initial guess or changing the recursion limit. Maybe there are no roots.')
-            return 
-        
+            warnings.warn(
+                f'Iteration limit ({limit}) reached without finding any root. Try with other initial guess or changing the recursion limit. Maybe there are no roots.')
+            return
+
         iter_dict[iter+1] = iteration(iter, iter_dict)
-        
+
         if abs(iter_dict[iter+1] - iter_dict[iter]) < err:
             return iter_dict[iter+1]
-        
+
         iter += 1
 
 # TODO: Raise exception if the determinant of jacobian of the initial condition is 0 (Singular matrix)
-def newton_systems(f:'Callable[float, ...]', J:'Callable[float, ...]', vec0:np.ndarray, err:float)-> np.ndarray:
+
+
+def newton_systems(f: 'Callable[float, ...]', J: 'Callable[float, ...]', vec0: np.ndarray, err: float) -> np.ndarray:
     """Solves systems of linear and nonlinear equations using the Newton method.
 
     Args:
@@ -116,7 +121,7 @@ def newton_systems(f:'Callable[float, ...]', J:'Callable[float, ...]', vec0:np.n
 
     Returns:
         np.ndarray|None: Root of the function or None if the algorithm reaches its recursion limit.
-    
+
     Examples: 
         Solve 
         ..math:: 
@@ -141,39 +146,40 @@ def newton_systems(f:'Callable[float, ...]', J:'Callable[float, ...]', vec0:np.n
     if np.linal.det(J(*vec0)) == 0:
         raise ValueError('Inverse of the Jacobian cannot be computed. It is a singular matrix (Determinant of the matrix is 0). ')
 
-    iter, iter_dict = 0, {0:vec0}
+    iter, iter_dict = 0, {0: vec0}
     limit = sys.getrecursionlimit()
 
     while True:
         if iter + 10 >= limit:
-            warnings.warn(f'Iteration limit ({limit}) reached without finding any root. Try with other initial guess or changing the recursion limit. Maybe there are no roots.')
-            return 
-        
+            warnings.warn(
+                f'Iteration limit ({limit}) reached without finding any root. Try with other initial guess or changing the recursion limit. Maybe there are no roots.')
+            return
+
         iter_dict[iter+1] = iter_dict[iter] - np.matmul(np.linalg.inv(J(*iter_dict[iter])), f(*iter_dict[iter]))
-        
-        if np.all(abs(iter_dict[iter+1] - iter_dict[iter]) < err):
+
+        if np.all(abs(iter_dict[iter + 1] - iter_dict[iter]) < err):
             return iter_dict[iter+1]
-        
+
         iter += 1
 
 
-def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000) -> float:
+def bisection(f: 'Callable[float]', a: float, b: float, err: float, Nmax: int = 100_000) -> float:
     """Computes Bisection method to find roots f(x)=0. 
 
     If there are no roots in the interval :math:`[a, b]`, the method will throw an exception. 
     This is checked using bolzano's theorem (If :math:`f(a)*f(b) >= 0`).
-    
+
     Args:
         f (Callable[float]): Function of which we want to find roots :math:`f(x)=0`.
         a (float): Lower bound of the interval.
         b (float): Upper bound of the interval.
         err (float): Tolerance of the result. It assures that the root is in :math:`[x-err, x+err]`. #TODO: Is this the interval?
         Nmax (int): Maximum number of iterations. Defaults to 100_000.
-    
+
     Raises:
         ValueError: If, according to Bolzano's theorem, there cannot be roots in :math:`[a, b]`. 
         ValueError: If the method, being at least one root in :math:`[a, b]`, fails to to compute the root.
-    
+
     Returns:
         float: Root x such as f(x)=0 with a tolerance err.
 
@@ -185,19 +191,19 @@ def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_0
         ValueError: Could not find a root in the interval [-0.5, 2] with tolerance 1e-10 in 5 iterations.
         >>> bisection(f, 5, 20, 1e-7)
         ValueError: f(a)*f(b)=9576 <0.   No roots in this interval.
-    """    
+    """
     if f(a)*f(b) >= 0:
         raise ValueError(f'f(a)*f(b) = {f(a)*f(b)} <0. \t No roots in this interval.')
-    
-    N = int(min(Nmax, np.ceil(np.log((b-a)/err) / np.log(2) - 1))) # What is this?
+
+    N = int(min(Nmax, np.ceil(np.log((b-a)/err) / np.log(2) - 1)))  # What is this?
     a_n = a
     b_n = b
     m_n = (a_n + b_n)/2
     f_m_n = f(m_n)
-    for _ in range(1,N+1):
-        
+    for _ in range(1, N+1):
+
         if f(a_n)*f_m_n < 0:
-            b_n = m_n    
+            b_n = m_n
 
         elif f(b_n)*f_m_n < 0:
             a_n = m_n
@@ -205,18 +211,20 @@ def bisection(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_0
         m_n = (a_n + b_n)/2
         f_m_n = f(m_n)
 
-        if abs(f_m_n) <= err: 
+        if abs(f_m_n) <= err:
             return m_n
-    
+
     raise ValueError(f'Could not find a root in the interval [{a}, {b}] with tolerance {err} in {N} iterations.')
 
 # TODO: Not validated
-def chord(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000, x0:float = None) -> float:
+
+
+def chord(f: 'Callable[float]', a: float, b: float, err: float, Nmax: int = 100_000, x0: float = None) -> float:
     """Computes Chord method to find roots f(x)=0. 
 
     If there are no roots in the interval :math:`[a, b]`, the method will throw an exception. 
     This is checked using bolzano's theorem (If :math:`f(a)*f(b) >= 0`).
-    
+
     Args:
         f (Callable[float]): Function of which we want to find roots :math:`f(x)=0`.
         a (float): Lower bound of the interval.
@@ -228,33 +236,34 @@ def chord(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000, 
     Raises:
         ValueError: If, according to Bolzano's theorem, there cannot be roots in :math:`[a, b]`. 
         ValueError: If the method, being at least one root in :math:`[a, b]`, fails to to compute the root.
-    
+
     Returns:
         float: Root x such as f(x)=0 with a tolerance err.
     """
     if f(a)*f(b) >= 0:
         raise ValueError(f'f(a)*f(b) = {f(a)*f(b)} <0. \t No roots in this interval.')
-    
-    x0_ = x0 if x0 is not None else (a+b)/2 # TODO: Check if there is a better initial guess
+
+    x0_ = x0 if x0 is not None else (a+b)/2  # TODO: Check if there is a better initial guess
     f_x_n = f(x0_)
     q = (f(b) - f(a)) / (b - a)
 
     for _ in range(1, Nmax+1):
-        
+
         x_n = x0_ - f_x_n / q
         f_x_n = f(x_n)
 
-        if abs(f_x_n) <= err: 
+        if abs(f_x_n) <= err:
             return x_n
 
     raise ValueError(f'Could not find a root in the interval [{a}, {b}] with tolerance {err} in {Nmax} iterations.')
 
-def secant(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000, x0:float = None) -> float:
+
+def secant(f: 'Callable[float]', a: float, b: float, err: float, Nmax: int = 100_000, x0: float = None) -> float:
     """Computes Secant method to find roots :math:`f(x)=0`. 
 
     If there are no roots in the interval :math:`[a, b]`, the method will throw an exception. 
     This is checked using bolzano's theorem (If :math:`f(a)*f(b) >= 0`).
-    
+
     To computes the first iteration, it computes the previous value as :math: `a-1`
 
     Args:
@@ -268,10 +277,10 @@ def secant(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000,
     Raises:
         ValueError: If, according to Bolzano's theorem, there cannot be roots in :math:`[a, b]`. 
         ValueError: If the method, being at least one root in :math:`[a, b]`, fails to to compute the root.
-    
+
     Returns:
         float: Root x such as f(x)=0 with a tolerance err.
-    
+
     Examples:
         >>> f = lambda x: (x**3 - 5*x - 9)
         >>> secant(f, 2, 5, 1e-4)
@@ -279,27 +288,26 @@ def secant(f:'Callable[float]', a:float, b:float, err:float, Nmax:int = 100_000,
     """
     if f(a)*f(b) >= 0:
         raise ValueError(f'f(a)*f(b) = {f(a)*f(b)} <0. \t No roots in this interval.')
-    
-    x_n = x0 if x0 is not None else (a+b)/2 # TODO: Check if there is a better initial guess
-    x_previous = a - 1 # TODO: Check if there is a better initial guess
+
+    x_n = x0 if x0 is not None else (a+b)/2  # TODO: Check if there is a better initial guess
+    x_previous = a - 1  # TODO: Check if there is a better initial guess
     f_x_n = f(x_n)
 
     for _ in range(1, Nmax+1):
-            
+
         f_x_previous = f(x_previous)
 
         q_n = (f_x_n - f_x_previous) / (x_n - x_previous)
         x_previous = x_n
-        
+
         x_n = x_n - f_x_n / q_n
-        
+
         f_x_n = f(x_n)
-        if abs(f_x_n) <= err: 
+        if abs(f_x_n) <= err:
             return x_n
 
     raise ValueError(f'Could not find a root in the interval [{a}, {b}] with tolerance {err} in {Nmax} iterations.')
 
-    
 
 if __name__ == '__main__':
     pass

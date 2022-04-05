@@ -1,8 +1,9 @@
 
+from typing import List
+
 import pandas as pd
 
-from typing import List
-#TODO: Account doc | & functionality for the kwargs
+# TODO: Account doc | & functionality for the kwargs
 
 def to_latex(col_names: 'List[str, ...]', cols: 'List[List, ...]', **kwargs) -> str:
     """High-level wrapper of pandas.DataFrame.to_latex with limited options.

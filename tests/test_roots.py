@@ -1,2 +1,3 @@
 from charliepy.roots import newton
 
+def test_newton():...

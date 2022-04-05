@@ -113,7 +113,7 @@ def newton_systems(f: 'Callable[float, ...]', J: 'Callable[float, ...]', vec0: n
     r"""Solves systems of linear and nonlinear equations using the Newton method.
 
     Args:
-        f (Callable[float, ...]): Vector function to find its roots.    
+        f (Callable[float, ...]): Vector function to find its roots.
         J (Callable[float, ...]): Jacobian of f.
         vec0 (np.ndarray): Initial guess of the solution. Avoid using guesses that make J a singular matrix (:math:`|J(vec0)| = 0`).
         err (float): Stopping criteria for the algorithm. Minimum difference between the to last consecutive solutions.
@@ -167,7 +167,7 @@ def newton_systems(f: 'Callable[float, ...]', J: 'Callable[float, ...]', vec0: n
 
 
 def bisection(f: 'Callable[float]', a: float, b: float, err: float, Nmax: int = 100_000) -> float:
-    r"""Computes Bisection method to find roots f(x)=0. 
+    r"""Computes Bisection method to find roots f(x)=0.
 
     If there are no roots in the interval :math:`[a, b]`, the method will throw an exception.
     This is checked using bolzano's theorem (If :math:`f(a)*f(b) >= 0`).

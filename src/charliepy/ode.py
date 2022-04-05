@@ -32,7 +32,7 @@ def euler_explicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, 
 
         for :math:`$\lambda = -1$` over the interval :math: `$[0,1]$` for a stepsize `$h=0.1$`.
 
-        Then: 
+        Then:
         >>> f = lambda y, t: -y
         >>> y0 = 1
         >>> h = 0.1
@@ -53,7 +53,7 @@ def euler_explicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, 
 
 
 def euler_explicit_midpoint(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) -> np.ndarray:
-    """Computes the explicit (forward) midpoint Euler method to solve ODEs.
+    r"""Computes the explicit (forward) midpoint Euler method to solve ODEs.
 
     The **explicit midpoint method** is :math: `u_{n+1}=u_{n-1}+2hf\left(t_n,u_n\right)`
 
@@ -73,7 +73,7 @@ def euler_explicit_midpoint(f: 'Callable[float, float]', y0: float, t0: float, t
 
     Examples:
 
-        Lets solve the problem 
+        Lets solve the problem
 
         :math: `$$\begin{array}{l}
                 y'=\lambda y \\

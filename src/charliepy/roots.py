@@ -167,9 +167,9 @@ def newton_systems(f: 'Callable[float, ...]', J: 'Callable[float, ...]', vec0: n
 
 
 def bisection(f: 'Callable[float]', a: float, b: float, err: float, Nmax: int = 100_000) -> float:
-    """Computes Bisection method to find roots f(x)=0. 
+    r"""Computes Bisection method to find roots f(x)=0. 
 
-    If there are no roots in the interval :math:`[a, b]`, the method will throw an exception. 
+    If there are no roots in the interval :math:`[a, b]`, the method will throw an exception.
     This is checked using bolzano's theorem (If :math:`f(a)*f(b) >= 0`).
 
     Args:
@@ -180,7 +180,7 @@ def bisection(f: 'Callable[float]', a: float, b: float, err: float, Nmax: int = 
         Nmax (int): Maximum number of iterations. Defaults to 100_000.
 
     Raises:
-        ValueError: If, according to Bolzano's theorem, there cannot be roots in :math:`[a, b]`. 
+        ValueError: If, according to Bolzano's theorem, there cannot be roots in :math:`[a, b]`.
         ValueError: If the method, being at least one root in :math:`[a, b]`, fails to to compute the root.
 
     Returns:

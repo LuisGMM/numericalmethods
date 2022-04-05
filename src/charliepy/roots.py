@@ -138,6 +138,9 @@ def newton_systems(f:'Callable[float, ...]', J:'Callable[float, ...]', vec0:np.n
         >>> f(*roots)
         [-3.552713678800501e-15, -4.440892098500626e-16]  
     """
+    if np.linal.det(J(*vec0)) == 0:
+        raise ValueError('Inverse of the Jacobian cannot be computed. It is a singular matrix (Determinant of the matrix is 0). ')
+
     iter, iter_dict = 0, {0:vec0}
     limit = sys.getrecursionlimit()
 

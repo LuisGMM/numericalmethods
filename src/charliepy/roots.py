@@ -108,8 +108,6 @@ def newton(err: float, f: 'Callable[float]' = None, f_dev: 'Callable[float]' = N
 
         iter += 1
 
-# TODO: Raise exception if the determinant of jacobian of the initial condition is 0 (Singular matrix)
-
 
 def newton_systems(f: 'Callable[float, ...]', J: 'Callable[float, ...]', vec0: np.ndarray, err: float) -> np.ndarray:
     """Solves systems of linear and nonlinear equations using the Newton method.

@@ -262,9 +262,9 @@ def chord(f: 'Callable[float]', a: float, b: float, err: float, Nmax: int = 100_
 
 
 def secant(f: 'Callable[float]', a: float, b: float, err: float, Nmax: int = 100_000, x0: float = None) -> float:
-    """Computes Secant method to find roots :math:`f(x)=0`. 
+    r"""Computes Secant method to find roots :math:`f(x)=0`.
 
-    If there are no roots in the interval :math:`[a, b]`, the method will throw an exception. 
+    If there are no roots in the interval :math:`[a, b]`, the method will throw an exception.
     This is checked using bolzano's theorem (If :math:`f(a)*f(b) >= 0`).
 
     To computes the first iteration, it computes the previous value as :math: `a-1`
@@ -278,7 +278,7 @@ def secant(f: 'Callable[float]', a: float, b: float, err: float, Nmax: int = 100
         x0 (float): Initial guess for the root. Defaults :math:`(a+b)/2`.
 
     Raises:
-        ValueError: If, according to Bolzano's theorem, there cannot be roots in :math:`[a, b]`. 
+        ValueError: If, according to Bolzano's theorem, there cannot be roots in :math:`[a, b]`.
         ValueError: If the method, being at least one root in :math:`[a, b]`, fails to to compute the root.
 
     Returns:

@@ -1,5 +1,5 @@
 
-from charliepy.ode import euler_explicit
+from charliepy.ode import euler_explicit, euler_implicit
 
 
 def test_euler_explicit():
@@ -10,4 +10,9 @@ def test_euler_explicit():
     assert [round(sol, 4) for sol in euler_explicit(f=f, y0=1, t0=0, t=1, h=0.1)] == ans
 
 
-def test_euler_implicit():...
+def test_euler_implicit_without_dependance_on_y():
+    
+    ans = [0, 1, 4, 9, 17, 28]
+    f = lambda y, t: (1 + t**3)**(1/2)
+
+    assert list(euler_implicit(f=f, y0=0, t0=0, t=5, h=1)) == ans

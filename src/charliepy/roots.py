@@ -57,8 +57,7 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
 
         >>> f_dev = lambda x: 1 / np.sqrt(2*np.pi) * np.exp(-x**2) 
         >>> ERR = 1e-5
-        >>> p0 = 0.5
-        >>> x0 = 0
+        >>> x0 = 0.5
         >>> C = -0.45
         >>> ans = newton(composite_simpson, f_dev, C, ERR, x0)
         >>> ans

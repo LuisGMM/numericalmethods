@@ -7,3 +7,8 @@ addopts = '--cov=charliepy'
 testpaths = [
     'tests',
 ]
+
+[tool.mypy]
+mypy_path = 'src'
+check_untyped_defs = true
+disallow_any_generics = true

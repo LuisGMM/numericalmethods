@@ -110,7 +110,7 @@ def newton(err: float, f: 'Callable[float]' = None, f_dev: 'Callable[float]' = N
 
 
 def newton_systems(f: 'Callable[float, ...]', J: 'Callable[float, ...]', vec0: np.ndarray, err: float) -> np.ndarray:
-    """Solves systems of linear and nonlinear equations using the Newton method.
+    r"""Solves systems of linear and nonlinear equations using the Newton method.
 
     Args:
         f (Callable[float, ...]): Vector function to find its roots.    

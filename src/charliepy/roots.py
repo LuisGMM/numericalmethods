@@ -55,7 +55,7 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
         Find a solution to :math:`$f(x) = 0$` accurate to within :math:`$10^{-5}$` using Newton\'s method with :math:`$p_0 = 0.5$`
         and the Composite Simpson\'s rule.
 
-        >>> f_dev = lambda x: 1 / np.sqrt(2*np.pi) * np.exp(-x**2) 
+        >>> f_dev = lambda x: 1 / np.sqrt(2*np.pi) * np.exp(-x**2 / 2) 
         >>> ERR = 1e-5
         >>> x0 = 0.5
         >>> C = -0.45

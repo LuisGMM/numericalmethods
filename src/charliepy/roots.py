@@ -130,9 +130,9 @@ def newton_systems(f: 'Callable[float, ...]', J: 'Callable[float, ...]', vec0: n
             `x^2+y^2-25=0  \\ x-y-2=0`
         With an adequate initial guess.
 
-        >>> f = lambda x, y: [x**2 + y**2 -25, 
+        >>> f = lambda x, y: [x**2 + y**2 -25,
                               x - y - 2]
-        >>> J = lambda x, y: [[2*x, 2*y], 
+        >>> J = lambda x, y: [[2*x, 2*y],
                               [1, -1]]
         >>> err = 1e-10
         >>> vec0 = [0, 0] #Invalid initial guess.
@@ -143,7 +143,7 @@ def newton_systems(f: 'Callable[float, ...]', J: 'Callable[float, ...]', vec0: n
         >>> roots
         [4.39116499 2.39116499]
         >>> f(*roots)
-        [-3.552713678800501e-15, -4.440892098500626e-16]  
+        [-3.552713678800501e-15, -4.440892098500626e-16]
     """
     if np.linal.det(J(*vec0)) == 0:
         raise ValueError('Inverse of the Jacobian cannot be computed. It is a singular matrix (Determinant of the matrix is 0). ')

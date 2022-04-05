@@ -3,11 +3,11 @@ from typing import Callable
 
 import numpy as np
 
-from roots import newton
+from charliepy.roots import newton
 
 
 def euler_explicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) -> np.ndarray:
-    """Computes the explicit (forward) Euler method to solve ODEs.
+    r"""Computes the explicit (forward) Euler method to solve ODEs.
 
     Args:
         f (Callable[float, float]): Function depending on y and t in that order.

@@ -175,6 +175,12 @@ def euler_explicit_systems(f: 'Callable[float, ...]', vec0: np.ndarray, t0: floa
 def euler_implicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float, *args, **kwargs) -> np.ndarray:
     """Computes the implicit (backward) Euler method to solve ODEs.
 
+    If `f` argument has an explicit dependence on y, Newton\' method is used to compute the next iteration the algorithm.
+    Then, `err` must be passed as extra argument, and it is recommended to pass the analytical derivative of `f` as f_dev.
+    In case this last `f_dev` is not passed, Newton\' method will use finite differences to numerically obtain it.
+    
+    See more about Newton\' method in module roots.
+
     Args:
         f (Callable[float, float]): Function depending on y and t in that order.
             Equivalent to f(y,t).

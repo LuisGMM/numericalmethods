@@ -23,7 +23,7 @@ def euler_explicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, 
 
     Examples:
 
-        Lets solve the problem 
+        Lets solve the problem
 
         :math: `$$\begin{array}{l}
                 y'=\lambda y \\

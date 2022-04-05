@@ -82,7 +82,7 @@ def euler_explicit_midpoint(f: 'Callable[float, float]', y0: float, t0: float, t
 
         for :math:`$\lambda = -1$` over the interval :math: `$[0,1]$` for a stepsize `$h=0.1$`.
 
-        Then: 
+        Then:
         >>> f = lambda y, t: -y
         >>> y0 = 1
         >>> h = 0.1
@@ -109,12 +109,12 @@ def euler_explicit_midpoint(f: 'Callable[float, float]', y0: float, t0: float, t
 
 
 def euler_explicit_systems(f: 'Callable[float, ...]', vec0: np.ndarray, t0: float, t: float, h: float) -> np.ndarray:
-    """Computes the explicit (forward) Euler method to solve a system of ODEs.
+    r"""Computes the explicit (forward) Euler method to solve a system of ODEs.
 
-    The order of the arguments (variables) in `f` must the the same of the values in `vec0`. 
+    The order of the arguments (variables) in `f` must the the same of the values in `vec0`.
 
     Args:
-        f (Callable[float, ...]): Function depending on the any number of variables. 
+        f (Callable[float, ...]): Function depending on the any number of variables.
             Currently it does not support explicit dependence on time.
             Equivalent to f(y,t).
         vec0 (np.ndarray): Initial values of the answer.
@@ -138,7 +138,7 @@ def euler_explicit_systems(f: 'Callable[float, ...]', vec0: np.ndarray, t0: floa
 
         Then
         >>> import numpy as np
-        >>> t0, t = 0, 50 
+        >>> t0, t = 0, 50
         >>> vec0 = np.array([0, 1, 1.05])
         >>> s, r, b = 10, 28, 8/3
         >>> f = lambda x, y, z: np.array([s*(y-x), x*(r-z)-y, x*y - b*z])
@@ -155,9 +155,6 @@ def euler_explicit_systems(f: 'Callable[float, ...]', vec0: np.ndarray, t0: floa
         >>> ax.set_xlabel('x', labelpad=20)
         >>> ax.set_ylabel('y', labelpad=20)
         >>> ax.set_zlabel('z', labelpad=20)
-        >>> 
-        >>> 
-        >>> 
     """
     t_ = np.arange(t0, t0+t, h)
     N = len(t_)

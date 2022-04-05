@@ -6,7 +6,7 @@ import numpy as np
 from roots import newton
 
 
-def euler_explicit(f:'Callable[float, float]', y0:float, t0:float, t:float, h:float)-> np.ndarray:
+def euler_explicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) -> np.ndarray:
     """Computes the explicit (forward) Euler method to solve ODEs.
 
     Args:
@@ -20,7 +20,7 @@ def euler_explicit(f:'Callable[float, float]', y0:float, t0:float, t:float, h:fl
 
     Returns:
         np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, t-h, t].
-    
+
     Examples:
 
         Lets solve the problem 
@@ -31,7 +31,7 @@ def euler_explicit(f:'Callable[float, float]', y0:float, t0:float, t:float, h:fl
                 \end{array}$$`
 
         for :math:`$\lambda = -1$` over the interval :math: `$[0,1]$` for a stepsize `$h=0.1$`.
-        
+
         Then: 
         >>> f = lambda y, t: -y
         >>> y0 = 1
@@ -45,13 +45,14 @@ def euler_explicit(f:'Callable[float, float]', y0:float, t0:float, t:float, h:fl
 
     u = np.zeros_like(t_)
     u[0] = y0
- 
+
     for i in range(N-1):
         u[i+1] = u[i] + h * f(u[i], t_[i])
-    
+
     return u
 
-def euler_explicit_midpoint(f:'Callable[float, float]', y0:float, t0:float, t:float, h:float)-> np.ndarray:
+
+def euler_explicit_midpoint(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) -> np.ndarray:
     """Computes the explicit (forward) midpoint Euler method to solve ODEs.
 
     The **explicit midpoint method** is :math: `u_{n+1}=u_{n-1}+2hf\left(t_n,u_n\right)`
@@ -80,7 +81,7 @@ def euler_explicit_midpoint(f:'Callable[float, float]', y0:float, t0:float, t:fl
                 \end{array}$$`
 
         for :math:`$\lambda = -1$` over the interval :math: `$[0,1]$` for a stepsize `$h=0.1$`.
-        
+
         Then: 
         >>> f = lambda y, t: -y
         >>> y0 = 1
@@ -89,23 +90,25 @@ def euler_explicit_midpoint(f:'Callable[float, float]', y0:float, t0:float, t:fl
         >>> y = euler_explicit_midpoint(f, y0, t0, t, h)
         >>> print(y)
     """
-    t_ = np.arange(t0, t0+t, h) 
+    t_ = np.arange(t0, t0+t, h)
     N = len(t_)
 
     u = np.zeros_like(t_)
     u_previous = y0 - h * f(y0, t_[0])
     u[0] = y0
- 
+
     for i in range(N-1):
         if i == 0:
-            u[i+1] = u_previous +2 * h * f(u[i], t_[i])    
+            u[i+1] = u_previous + 2 * h * f(u[i], t_[i])
         else:
-            u[i+1] = u[i-1] + 2 *h * f(u[i], t_[i])
-    
+            u[i+1] = u[i-1] + 2 * h * f(u[i], t_[i])
+
     return u
 
-#TODO: Currently the method does not support ODEs that explicitly depend on time. That means `f` and `vec0` must have the same dimensions.
-def euler_explicit_systems(f:'Callable[float, ...]', vec0:np.ndarray, t0:float, t:float, h:float)-> np.ndarray:
+# TODO: Currently the method does not support ODEs that explicitly depend on time. That means `f` and `vec0` must have the same dimensions.
+
+
+def euler_explicit_systems(f: 'Callable[float, ...]', vec0: np.ndarray, t0: float, t: float, h: float) -> np.ndarray:
     """Computes the explicit (forward) Euler method to solve a system of ODEs.
 
     The order of the arguments (variables) in `f` must the the same of the values in `vec0`. 
@@ -122,7 +125,7 @@ def euler_explicit_systems(f:'Callable[float, ...]', vec0:np.ndarray, t0:float, 
 
     Returns:
         np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, t-h, t].
-    
+
     Examples: 
         Lets solve the Lorentz equations :math:`$$\begin{array}{l}
                                                 \frac{dx}{dt}=\sigma(y-x) \\
@@ -130,7 +133,7 @@ def euler_explicit_systems(f:'Callable[float, ...]', vec0:np.ndarray, t0:float, 
                                                 \frac{dz}{dt}=xy-\beta z
                                                 \end{array}
                                                 $$`
-        
+
         for :math:`$\sigma=10$`, :math:`$\rho=28$`, :math:`$\beta=8/3$`, :math:`$t_0=0$`, :math:`$t_f=50$` and :math:`$(x[0],y[0],z[0])=(0, 1, 1.05)$`
 
         Then
@@ -141,9 +144,9 @@ def euler_explicit_systems(f:'Callable[float, ...]', vec0:np.ndarray, t0:float, 
         >>> f = lambda x, y, z: np.array([s*(y-x), x*(r-z)-y, x*y - b*z])
         >>> h = 1e-4
         >>> u = euler_explicit_systems(f, vec0, t0, tf, h)
-        
+
         If we want to plot these results
-        
+
         >>> import matplotlib.pyplot as plt
         >>> fig = plt.figure(figsize = (10,10))
         >>> ax = plt.axes(projection='3d')
@@ -156,20 +159,22 @@ def euler_explicit_systems(f:'Callable[float, ...]', vec0:np.ndarray, t0:float, 
         >>> 
         >>> 
     """
-    t_ = np.arange(t0, t0+t, h)  
+    t_ = np.arange(t0, t0+t, h)
     N = len(t_)
 
     u = np.zeros((vec0.shape[0], N))
 
     u[:, t0] = vec0
- 
+
     for i in range(N-1):
         u[..., i+1] = u[..., i] + h * f(*u[..., i])
-    
+
     return u
 
 # TODO: Pending tests
-def euler_implicit(f:'Callable[float, float]', y0:float, t0:float, t:float, h:float, *args, **kwargs)-> np.ndarray:
+
+
+def euler_implicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float, *args, **kwargs) -> np.ndarray:
     """Computes the implicit (backward) Euler method to solve ODEs.
 
     Args:
@@ -189,16 +194,18 @@ def euler_implicit(f:'Callable[float, float]', y0:float, t0:float, t:float, h:fl
 
     u = np.zeros_like(t_)
     u[0] = y0
-        
-    for i in range(N-1):        
 
-        g = lambda y: u[i] + u[i+1] + h*f(y, t_[i+1])
+    for i in range(N-1):
+
+        def g(y): return u[i] + u[i+1] + h*f(y, t_[i+1])
         u[i+1] = newton(*args, f=g, x0=u[i], **kwargs)
 
     return u
 
-# TODO: To be validated 
-def heun(f:'Callable[float, float]', y0:float, t0:float, t:float, h:float)-> np.ndarray:
+# TODO: To be validated
+
+
+def heun(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) -> np.ndarray:
     """Computes Heun's method to solve ODEs.
 
     Args:
@@ -209,7 +216,7 @@ def heun(f:'Callable[float, float]', y0:float, t0:float, t:float, h:float)-> np.
         t0 (float): Initial time.
         t (float): Final time.
         h (float): Separation between the points of the interval.
-    
+
     Returns:
         np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, t-h, t].    
     """
@@ -218,8 +225,8 @@ def heun(f:'Callable[float, float]', y0:float, t0:float, t:float, h:float)-> np.
 
     u = np.zeros_like(t_)
     u[0] = y0
- 
+
     for i in range(N-1):
-        u[i+1] = u[i] + h/2 * ( f(u[i]+h*f(u[i], t_[i]), t_[i+1]) + f(u[i], t_[i]) )
+        u[i+1] = u[i] + h/2 * (f(u[i]+h*f(u[i], t_[i]), t_[i+1]) + f(u[i], t_[i]))
 
     return u

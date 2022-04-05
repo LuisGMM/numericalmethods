@@ -1,4 +1,5 @@
 
+import inspect
 from typing import Callable
 
 import numpy as np
@@ -186,6 +187,11 @@ def euler_implicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, 
     Returns:
         np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, t-h, t].
     """
+    returns_of_f = inspect.getsource(f).split('return')
+
+    if len(returns_of_f)>2:
+        raise ValueError('Function `f` is not valid. It can only have one return.')
+
     t_ = np.arange(t0, t+h, h)
     N = len(t_)
 

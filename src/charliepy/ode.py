@@ -192,6 +192,8 @@ def euler_implicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, 
     if len(returns_of_f)>2:
         raise ValueError('Function `f` is not valid. It can only have one return.')
 
+    returns_of_f = returns_of_f[-1]
+
     t_ = np.arange(t0, t+h, h)
     N = len(t_)
 

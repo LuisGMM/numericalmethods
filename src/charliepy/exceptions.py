@@ -1,5 +1,4 @@
 
 
-
 class InadequateArgsCombination(Exception):
     pass

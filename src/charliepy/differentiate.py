@@ -2,8 +2,8 @@
 
 import scipy.special as sci
 
-# Tested
-def forward(order:int, f:'function', x:float, h:float, exact:bool = False) -> float:
+
+def forward(order: int, f: 'function', x: float, h: float, exact: bool = False) -> float:
     """Use forward finite difference formula of order `order` to compute the derivative of `f` at `x`.
 
     Args:
@@ -20,11 +20,11 @@ def forward(order:int, f:'function', x:float, h:float, exact:bool = False) -> fl
 
     Returns:
         float: Derivative of order `order` of `f` evaluated at `x`. 
-    """         
-    return sum( [ (-1)**(order-k) * sci.comb(order, k, exact) * f(x + k*h) for k in  range(order+1)] ) / h**order
+    """
+    return sum([(-1)**(order-k) * sci.comb(order, k, exact) * f(x + k*h) for k in range(order+1)]) / h**order
 
 
-def backward(order:int, f:'function', x:float, h:float, exact:bool = False) -> float: 
+def backward(order: int, f: 'function', x: float, h: float, exact: bool = False) -> float:
     """Use backward finite difference formula of order `order` to compute the derivative of `f` at `x`.
 
     Args:
@@ -41,11 +41,11 @@ def backward(order:int, f:'function', x:float, h:float, exact:bool = False) -> f
 
     Returns:
         float: Derivative of order `order` of `f` evaluated at `x`. 
-    """  
-    return sum( [ (-1)**(k) * sci.comb(order, k, exact) * f(x - k*h) for k in  range(order+1)] ) / h**order
+    """
+    return sum([(-1)**(k) * sci.comb(order, k, exact) * f(x - k*h) for k in range(order+1)]) / h**order
 
 
-def central(order:int, f:'function', x:float, h:float, exact:bool = False) -> float: 
+def central(order: int, f: 'function', x: float, h: float, exact: bool = False) -> float:
     """Use central finite difference formula of order `order` to compute the derivative of `f` at `x`.
 
     Args:
@@ -62,9 +62,8 @@ def central(order:int, f:'function', x:float, h:float, exact:bool = False) -> fl
 
     Returns:
         float: Derivative of order `order` of `f` evaluated at `x`. 
-    """  
-    return sum( [ (-1)**(k) * sci.comb(order, k, exact) * f(x - (order/2 - k)*h) for k in  range(order+1)] ) / h**order
-
+    """
+    return sum([(-1)**(k) * sci.comb(order, k, exact) * f(x - (order/2 - k)*h) for k in range(order+1)]) / h**order
 
 
 if __name__ == '__main__':

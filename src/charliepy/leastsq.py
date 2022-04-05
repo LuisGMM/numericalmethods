@@ -8,7 +8,7 @@ def leastsq(x: np.ndarray, y: np.ndarray, sigma: float) -> 'tuple[[float, float]
         ValueError: If the lengths of the arrays are not equal.
         ValueError: If the array x is empty. It is checked after the lengths so y would also be empty.
     Returns:
-        tuple((float, float), (float, float)): Returns a tuple containing two tuples. 
+        tuple((float, float), (float, float)): Returns a tuple containing two tuples.
             The first one contains at position 0 the slope (m in literature) and at position 1 its error.
             The second one contains at position 0 the y-intercept (b in literature) and at position 1 its error.
     """

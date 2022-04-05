@@ -1,0 +1,27 @@
+Metadata-Version: 2.1
+Name: CharliePY
+Version: 0.0.1
+Summary: Packages to help, specially but not uniquelly, UC3M student in their assignments.
+Home-page: https://github.com/LuisGMM/CharliePY
+Author: Luis Grau Martin-Maldonado
+Author-email: l.grau@alumnos.uc3m.es
+License: UNKNOWN
+Project-URL: Bug Tracker, https://github.com/LuisGMM/CharliePY/issues
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Provides-Extra: testing
+License-File: LICENSE
+
+# CharliePY
+This package aims to give the typical UC3M (Universidad Carlos III de Madrid) the main resources to make experiment reports, numerical labs, numerical methods assignments, etc.
+
+

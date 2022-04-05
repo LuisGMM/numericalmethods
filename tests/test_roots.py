@@ -4,6 +4,8 @@ import numpy as np
 from charliepy.roots import newton
 from charliepy.integrate import composite_simpson, composite_trapezoid
 
+
+
 def test_newton_f_and_f_dev():
     ans = 1
     f = lambda x: x**2 -1

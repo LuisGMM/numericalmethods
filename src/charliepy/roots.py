@@ -17,7 +17,7 @@ from charliepy.exceptions import InadequateArgsCombination
 def newton(err: float, f: 'Callable[float]' = None, f_dev: 'Callable[float]' = None,
            integrator: 'Callable[Callable, float, float, float]' = None, differentiator: 'Callable[int, Callable, float, float, bool]' = None, *,
            c: float = 0, x0: float = 0, n: int = 100_000, h_err: float = 1e-4) -> float:
-    """Newton's method to find roots of a function.
+    r"""Newton's method to find roots of a function.
 
     If no `f` is given but `f_dev` and `integrator` are, it will compute the roots of the integral of `f_dev` with integration constant c.
     If `f_dev` is not given, it will be computed from `f` with the mathematical definition of a derivative.
@@ -44,7 +44,7 @@ def newton(err: float, f: 'Callable[float]' = None, f_dev: 'Callable[float]' = N
         float|None: Root of the function or None if the algorithm reaches its recursion limit.
 
     Examples:
-        :math: `$$\int_{0}^{x}\frac{1}{\sqrt{2\pi}}e^{-t^2/2}dt=0.45$$`
+        :math: `$$\int_{0}^{x}\frac{1}{\sqrt{2\\pi}}e^{-t^2/2}dt=0.45$$`
 
         can be solved for x with :math: `$$f(x)=\int_{0}^{x}\frac{1}{\sqrt{2\pi}}e^{-t^2/2}dt-0.45$$`
 
@@ -56,7 +56,7 @@ def newton(err: float, f: 'Callable[float]' = None, f_dev: 'Callable[float]' = N
         Find a solution to :math:`$f(x) = 0$` accurate to within :math:`$10^{-5}$` using Newton\'s method with :math:`$p_0 = 0.5$`
         and the Composite Simpson\'s rule.
 
-        >>> f_dev = lambda x: 1 / np.sqrt(2*np.pi) * np.exp(-x**2 / 2) 
+        >>> f_dev = lambda x: 1 / np.sqrt(2*np.pi) * np.exp(-x**2 / 2)
         >>> ERR = 1e-5
         >>> x0 = 0.5
         >>> C = -0.45

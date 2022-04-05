@@ -31,7 +31,7 @@ def newton(err: float, f: 'Callable[float]' = None, f_dev: 'Callable[float]' = N
         differentiator (Callable[int, Callable, float, float, bool]): Differentiation method to compute the derivative of `f` during the method. 
             It should be `forward`, `backward` or `central` methods from differentiate module. Defaults to None.
         c (float, optional): Integration constant of the integral of f_dev. Defaults to 0.
-        x0 (float, optional): Initial guess of the root. 
+        x0 (float, optional): Initial guess of the root.
             Note that an inadequate first guess could lead to undesired outputs such as no roots or undesired roots.
             Defaults to 0.
         n (int, optional): The number of parts the interval of the integrator method is divided into. Defaults to 100_000.

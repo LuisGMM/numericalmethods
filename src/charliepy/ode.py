@@ -211,7 +211,6 @@ def euler_implicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, 
     elif n_lambdas_of_f == 2:
         function_of_f = lambdas_of_f[-1].split(':')[-1]
     
-    print(function_of_f)
     t_ = np.arange(t0, t+h, h)
     N = len(t_)
 

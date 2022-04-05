@@ -6,11 +6,11 @@ import numpy as np
 
 
 def composite_trapezoid(f_: 'Callable[float]', a: float, b: float, n: float) -> float:
-    """Computes the analitical solution of the integral of f from a to b 
-    following the composite trapezoidal rule. 
+    """Computes the analitical solution of the integral of f from a to b
+    following the composite trapezoidal rule.
 
     Args:
-        f_ (Callable[float]): Function to be integrated  
+        f_ (Callable[float]): Function to be integrated.
         a (float): Lower bound of hte interval.
         b (float): Upper bound of the interval.
         n (float): The number of parts the interval is divided into.
@@ -26,11 +26,11 @@ def composite_trapezoid(f_: 'Callable[float]', a: float, b: float, n: float) -> 
 
 
 def composite_simpson(f_: 'Callable[float]', a: float, b: float, n: float) -> float:
-    """Computes the analitical solution of the integral of f from a to b 
-    following the composite Simpson's 1/3 rule. 
+    """Computes the analitical solution of the integral of f from a to b
+    following the composite Simpson's 1/3 rule.
 
     Args:
-        f_ (Callable[float]): Function to be integrated  
+        f_ (Callable[float]): Function to be integrated.
         a (float): Lower bound of hte interval.
         b (float): Upper bound of the interval.
         n (float): The number of parts the interval is divided into.

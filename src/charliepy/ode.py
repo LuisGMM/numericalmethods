@@ -194,19 +194,31 @@ def euler_implicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, 
         np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, t-h, t].
     """
     returns_of_f = inspect.getsource(f).split('return')
+    lambdas_of_f = inspect.getsource(f).split('lambda')
 
-    if len(returns_of_f)>2:
-        raise ValueError('Function `f` is not valid. It can only have one return.')
+    n_returns_of_f = len(returns_of_f)
+    n_lambdas_of_f = len(lambdas_of_f)
 
-    return_of_f = returns_of_f[-1]
+    if n_returns_of_f > 2 or n_lambdas_of_f > 2:
+        raise ValueError('Function `f` is not valid. It can only have one return or one lambda.')
 
+    if n_returns_of_f < 2 and n_lambdas_of_f < 2:
+        raise ValueError('Function `f` is not valid. It must have one return or one lambda.')
+    
+    elif n_returns_of_f == 2:
+        function_of_f = returns_of_f[-1]
+    
+    elif n_lambdas_of_f == 2:
+        function_of_f = lambdas_of_f[-1].split(':')[-1]
+    
+    print(function_of_f)
     t_ = np.arange(t0, t+h, h)
     N = len(t_)
 
     u = np.zeros_like(t_)
     u[0] = y0
 
-    if 'y' in return_of_f:
+    if 'y' in function_of_f:
 
         for i in range(N-1):
             def g(y): return u[i] - u[i+1] + h*f(y, t_[i+1])

@@ -83,7 +83,7 @@ def newton(err: float, f: 'Callable[float]' = None, f_dev: 'Callable[float]' = N
 
         elif differentiator:
             def iteration(iter_idx, iter_dict): return iter_dict[iter_idx] - f(iter_dict[iter_idx]) / \
-                differentiator(1, f, iter_dict[iter_idx], h_err, True)  # TODO: Is order arg right?
+                differentiator(1, f, iter_dict[iter_idx], h_err, True)
 
         else:
             def iteration(iter_idx, iter_dict): return iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])

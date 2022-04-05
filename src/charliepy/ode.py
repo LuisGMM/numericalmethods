@@ -194,7 +194,7 @@ def euler_implicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, 
 
     for i in range(N-1):
 
-        def g(y): return u[i] + u[i+1] + h*f(y, t_[i+1])
+        def g(y): return u[i] - u[i+1] + h*f(y, t_[i+1])
         u[i+1] = newton(*args, f=g, x0=u[i], **kwargs)
 
     return u

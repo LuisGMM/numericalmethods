@@ -1,14 +1,15 @@
 
+from typing import Callable
 
 import scipy.special as sci
 
 
-def forward(order: int, f: 'function', x: float, h: float, exact: bool = False) -> float:
+def forward(order: int, f: 'Callable', x: float, h: float, exact: bool = False) -> float:
     """Use forward finite difference formula of order `order` to compute the derivative of `f` at `x`.
 
     Args:
         order (int): Order of the derivate. (first, second ...).
-        f (function): Function for which the derivative will be computed.
+        f (Callable): Function for which the derivative will be computed.
             Only one argument will be passed to it, `x`.
         x (float): Point at which the derivative will be computed.
         h (float): Error of the approximation # TODO: Is it the error?
@@ -24,12 +25,12 @@ def forward(order: int, f: 'function', x: float, h: float, exact: bool = False) 
     return sum([(-1)**(order-k) * sci.comb(order, k, exact) * f(x + k*h) for k in range(order+1)]) / h**order
 
 
-def backward(order: int, f: 'function', x: float, h: float, exact: bool = False) -> float:
+def backward(order: int, f: 'Callable', x: float, h: float, exact: bool = False) -> float:
     """Use backward finite difference formula of order `order` to compute the derivative of `f` at `x`.
 
     Args:
         order (int): Order of the derivate. (first, second ...).
-        f (function): Function for which the derivative will be computed.
+        f (Callable): Function for which the derivative will be computed.
             Only one argument will be passed to it, `x`.
         x (float): Point at which the derivative will be computed.
         h (float): Error of the approximation # TODO: Is it the error?
@@ -45,12 +46,12 @@ def backward(order: int, f: 'function', x: float, h: float, exact: bool = False)
     return sum([(-1)**(k) * sci.comb(order, k, exact) * f(x - k*h) for k in range(order+1)]) / h**order
 
 
-def central(order: int, f: 'function', x: float, h: float, exact: bool = False) -> float:
+def central(order: int, f: 'Callable', x: float, h: float, exact: bool = False) -> float:
     """Use central finite difference formula of order `order` to compute the derivative of `f` at `x`.
 
     Args:
         order (int): Order of the derivate. (first, second ...).
-        f (function): Function for which the derivative will be computed.
+        f (Callable): Function for which the derivative will be computed.
             Only one argument will be passed to it, `x`.
         x (float): Point at which the derivative will be computed.
         h (float): Error of the approximation # TODO: Is it the error?

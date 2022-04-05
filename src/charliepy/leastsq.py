@@ -2,8 +2,7 @@
 import numpy as np
 
 
-
-def leastsq(x: np.ndarray, y: np.ndarray, sigma:float)-> 'tuple[[float, float], [float, float]]':
+def leastsq(x: np.ndarray, y: np.ndarray, sigma: float) -> 'tuple[[float, float], [float, float]]':
     """ Computes the least squares of the 1D vectors x and y.
     Raises:
         ValueError: If the lengths of the arrays are not equal.
@@ -12,14 +11,14 @@ def leastsq(x: np.ndarray, y: np.ndarray, sigma:float)-> 'tuple[[float, float], 
         tuple((float, float), (float, float)): Returns a tuple containing two tuples. 
             The first one contains at position 0 the slope (m in literature) and at position 1 its error.
             The second one contains at position 0 the y-intercept (b in literature) and at position 1 its error.
-    """    
+    """
     n = len(x)
 
     if n != len(y):
         raise ValueError(f'Length of the data array must be equal, length of x is {n} and y is {len(y)}. Please check. ')
 
     if n == 0:
-        raise ValueError(f'Arrays cannot be empty. Please check.')
+        raise ValueError('Arrays cannot be empty. Please check.')
 
     sum_x, sum_y = np.sum(x), np.sum(y)
     sum_x2 = np.sum(x*x)
@@ -29,17 +28,16 @@ def leastsq(x: np.ndarray, y: np.ndarray, sigma:float)-> 'tuple[[float, float], 
     m = (sum_x*sum_y - n*sum_xy) * div
     b = (sum_x*sum_xy - sum_xy*sum_x2) * div
 
-    m_e = np.sqrt( n*sigma**2 * (-1) * div )
-    b_e = np.sqrt( sum_x2*sigma**2 * (-1) * div )
+    m_e = np.sqrt(n*sigma**2 * (-1) * div)
+    b_e = np.sqrt(sum_x2*sigma**2 * (-1) * div)
 
-    return (m,m_e), (b, b_e)
-
+    return (m, m_e), (b, b_e)
 
 
 if __name__ == '__main__':
 
-    x = eval('['+ input("Introduce x data separated by ,:") + ']')
-    y = eval('['+ input("Introduce y data separated by ,:") + ']')
+    x = eval('[' + input("Introduce x data separated by ,:") + ']')
+    y = eval('[' + input("Introduce y data separated by ,:") + ']')
 
     sigma = float(input("Introduce Sigma: "))
 

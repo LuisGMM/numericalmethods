@@ -154,7 +154,8 @@ def newton_systems(f: 'Callable[float, ...]', J: 'Callable[float, ...]', vec0: n
     while True:
         if iter + 10 >= limit:
             warnings.warn(
-                f'Iteration limit ({limit}) reached without finding any root. Try with other initial guess or changing the recursion limit. Maybe there are no roots.')
+                f'Iteration limit ({limit}) reached without finding any root. Try with other initial guess or changing the recursion limit.\
+                     Maybe there are no roots.')
             return
 
         iter_dict[iter+1] = iter_dict[iter] - np.matmul(np.linalg.inv(J(*iter_dict[iter])), f(*iter_dict[iter]))

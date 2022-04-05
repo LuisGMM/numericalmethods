@@ -126,7 +126,7 @@ def euler_explicit_systems(f: 'Callable[float, ...]', vec0: np.ndarray, t0: floa
     Returns:
         np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, t-h, t].
 
-    Examples: 
+    Examples:
         Lets solve the Lorentz equations :math:`$$\begin{array}{l}
                                                 \frac{dx}{dt}=\sigma(y-x) \\
                                                 \frac{dy}{dt}=x(\rho-z)-y \\
@@ -215,7 +215,7 @@ def heun(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) 
         h (float): Separation between the points of the interval.
 
     Returns:
-        np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, t-h, t].    
+        np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, t-h, t].
     """
     t_ = np.arange(t0, t0+t, h)
     N = len(t_)

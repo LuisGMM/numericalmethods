@@ -69,7 +69,7 @@ def newton(err:float, f:'Callable[float]' = None, f_dev:'Callable[float]' = None
             iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])
 
         elif integrator:
-            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - (integrator(f_dev, x0, iter_dict[iter_idx], n) + c) / f_dev(iter_dict[iter_idx])
+            iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - (integrator(f_dev, 0, iter_dict[iter_idx], n) + c) / f_dev(iter_dict[iter_idx])
 
         else:
             iteration = lambda iter_idx, iter_dict: iter_dict[iter_idx] - f(iter_dict[iter_idx]) / f_dev(iter_dict[iter_idx])

@@ -97,7 +97,8 @@ def newton(err: float, f: 'Callable[float]' = None, f_dev: 'Callable[float]' = N
     while True:
         if iter + 10 >= limit:
             warnings.warn(
-                f'Iteration limit ({limit}) reached without finding any root. Try with other initial guess or changing the recursion limit. Maybe there are no roots.')
+                f'Iteration limit ({limit}) reached without finding any root. Try with other initial guess or changing the recursion limit. \
+                    Maybe there are no roots.')
             return
 
         iter_dict[iter+1] = iteration(iter, iter_dict)

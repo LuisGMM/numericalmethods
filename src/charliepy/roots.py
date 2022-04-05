@@ -118,6 +118,9 @@ def newton_systems(f: 'Callable[float, ...]', J: 'Callable[float, ...]', vec0: n
         vec0 (np.ndarray): Initial guess of the solution. Avoid using guesses that make J a singular matrix (:math:`|J(vec0)| = 0`).
         err (float): Stopping criteria for the algorithm. Minimum difference between the to last consecutive solutions.
 
+    Raises:
+        ValueError: If the Jacobian of vec0 is a singular matrix, because its inverse cannot be computed. 
+
     Returns:
         np.ndarray|None: Root of the function or None if the algorithm reaches its recursion limit.
 

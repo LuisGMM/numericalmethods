@@ -5,6 +5,7 @@ import pandas as pd
 
 # TODO: Account doc | & functionality for the kwargs
 
+
 def to_latex(col_names: 'List[str, ...]', cols: 'List[List, ...]', **kwargs) -> str:
     """High-level wrapper of pandas.DataFrame.to_latex with limited options.
 

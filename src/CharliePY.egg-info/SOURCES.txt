@@ -20,4 +20,3 @@ src/charliepy/ode.py
 src/charliepy/py.typed
 src/charliepy/roots.py
 src/charliepy/to_latex.py
-src/charliepy/utilmethods.py

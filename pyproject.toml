@@ -16,4 +16,5 @@ ignore_missing_imports = true
 no_implicit_optional = true
 show_error_codes = true
 strict_equality = true
-warn_redundant_cast
+warn_redundant_casts = true
+warn_return_any = true

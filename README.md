@@ -41,3 +41,7 @@ This package aims to give the typical UC3M (Universidad Carlos III de Madrid) th
 - Euler's explicit midpoint method
 - Euler's implicit (backward) method
 - Heun's method
+<!-- - Taylor's (Order Two) method
+- Taylor's (Order Four) method
+- Runge-Kutta (Order Four) method -->
+

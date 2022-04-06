@@ -45,3 +45,9 @@ This package aims to give the typical UC3M (Universidad Carlos III de Madrid) th
 - Taylor's (Order Four) method
 - Runge-Kutta (Order Four) method -->
 
+### Systems of ODEs (Ordinary differential equations)
+
+<!-- - Runge-Kutta (Order Four) method -->
+- Euler's explicit (forward) method for systems.
+- Newton's method for systems
+

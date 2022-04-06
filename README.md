@@ -30,3 +30,8 @@ This package aims to give the typical UC3M (Universidad Carlos III de Madrid) th
 <!-- - Three-Point method
 - Five-Point method -->
 
+### Numerical integration
+
+- Composite Trapezoide method
+- Composite 1/3 Simpson's method
+

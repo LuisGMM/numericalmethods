@@ -15,12 +15,19 @@ def newton_horner(x, x_points: np.ndarray, y_points: np.ndarray = None, coeffs: 
         y(np.ndarray): `y` coordinates of the points. Defaults to None.
         coeffs(np.ndarray): coefficients of the polynomial. Defaults to None.
 
+    Raises:
+        ValueError: If `x` and `y` are not of the same length. 
+
     Returns:
         float: the polynomial evaluated at x.
 
     """
     if y_points is None and coeffs is None:
         raise InadequateArgsCombination('Cannot evaluate Newton\'s polynomial with the combination of arguments given. Check the valid combinations.')
+
+    if y_points is not None:
+        if len(x_points) != len(y_points):
+            raise ValueError('`x_points` and `y_points` must be the same length.')
 
     coeffs_ = coeffs if coeffs is not None else horner_algorithm(x_points, y_points)
 
@@ -33,7 +40,7 @@ def newton_horner(x, x_points: np.ndarray, y_points: np.ndarray = None, coeffs: 
     return polynom
 
 
-def horner_algorithm(x: np.ndarray, y: np.ndarray) -> float:
+def horner_algorithm(x: np.ndarray, y: np.ndarray) -> np.ndarray:
     """ Computes Newton interpolation polynomial by Horner's algorithm for some given coordinates.
 
     `x` and `y` must have the same length.
@@ -57,7 +64,7 @@ def horner_algorithm(x: np.ndarray, y: np.ndarray) -> float:
 
     for j in range(LEN):
         if j == 0:
-            matrix[:, 1] = y
+            matrix[:, 1] = y-
 
         for i in range(LEN-j):
             matrix[i, j] = (matrix[i+1, j] - matrix[i, j]) / (x[i+1] - x[i])

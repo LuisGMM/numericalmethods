@@ -32,3 +32,6 @@ def newton_horner(x: np.ndarray, y: np.ndarray) -> np.ndarray:
             matrix[i, j] = (matrix[i+1, j] - matrix[i, j]) / (x[i+1] - x[i])
 
     return matrix[0]
+
+
+def horner_algorithm(x, x_points:list = None, y_points:list = None, coeffs:list = None) -> float:...

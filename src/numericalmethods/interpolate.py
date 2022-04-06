@@ -2,7 +2,7 @@
 import numpy as np
 
 
-def newton_horner(x, x_points:np.ndarray = None, y_points:np.ndarray = None, coeffs:np.ndarray = None) -> np.ndarray:
+def newton_horner(x, x_points:np.ndarray, y_points:np.ndarray = None, coeffs:np.ndarray = None) -> np.ndarray:
     """ Evaluates the polynomial returned by Horner's algorithm.
 
     If no coefficients are given this method will compute them

@@ -22,3 +22,11 @@ This package aims to give the typical UC3M (Universidad Carlos III de Madrid) th
 - Briot-Ruffini method
 - Newton's Divided-Difference method -->
 
+### Numerical differentiation
+
+- Forward-difference method
+- Backward-difference method
+- Central-difference method
+<!-- - Three-Point method
+- Five-Point method -->
+

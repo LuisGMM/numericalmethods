@@ -1,8 +1,8 @@
 
 import numpy as np
 
-from charliepy.roots import newton
-from charliepy.integrate import composite_simpson, composite_trapezoid
+from numericalmethods.roots import newton
+from numericalmethods.integrate import composite_simpson, composite_trapezoid
 
 
 

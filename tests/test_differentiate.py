@@ -1,5 +1,5 @@
 
-from charliepy.differentiate import forward, backward, central
+from numericalmethods.differentiate import forward, backward, central
 
 
 # def test_forward_order_1_to_10():

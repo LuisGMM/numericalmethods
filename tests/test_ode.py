@@ -1,5 +1,5 @@
 
-from charliepy.ode import euler_explicit, euler_implicit
+from numericalmethods.ode import euler_explicit, euler_implicit
 
 
 def test_euler_explicit():

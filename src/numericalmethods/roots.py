@@ -4,7 +4,7 @@ from typing import Callable
 
 import numpy as np
 
-from charliepy.exceptions import InadequateArgsCombination
+from numericalmethods.exceptions import InadequateArgsCombination
 
 # TODO: Shield all methods.
 # TODO: Adequately use logging and warnings.

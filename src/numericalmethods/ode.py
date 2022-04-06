@@ -4,7 +4,7 @@ from typing import Callable
 
 import numpy as np
 
-from charliepy.roots import newton
+from numericalmethods.roots import newton
 
 
 def euler_explicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) -> np.ndarray:

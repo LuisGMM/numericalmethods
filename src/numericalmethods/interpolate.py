@@ -34,4 +34,14 @@ def newton_horner(x: np.ndarray, y: np.ndarray) -> np.ndarray:
     return matrix[0]
 
 
-def horner_algorithm(x, x_points:list = None, y_points:list = None, coeffs:list = None) -> float:...
+def horner_algorithm(x, x_points:list = None, y_points:list = None, coeffs:list = None) -> float:
+
+    coeffs_ = coeffs if coeffs is not None else horner_algorithm(x_points, y_points)
+
+    N = len(x_points) - 1
+    polynom = coeffs_[N]
+    
+    for k in range(1,N+1):
+        polynom = coeffs_[N-k] + (x -x_points[N-k])*polynom
+    
+    return polynom

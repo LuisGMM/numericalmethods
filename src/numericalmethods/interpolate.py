@@ -2,10 +2,10 @@
 import numpy as np
 
 
-def newton_horner(x, x_points:np.ndarray, y_points:np.ndarray = None, coeffs:np.ndarray = None) -> np.ndarray:
+def newton_horner(x, x_points: np.ndarray, y_points: np.ndarray = None, coeffs: np.ndarray = None) -> np.ndarray:
     """ Evaluates the polynomial returned by Horner's algorithm.
 
-    If no coefficients are given this method will compute them
+    If no coefficients are given this method will compute them.
 
     Args:
         x(float): The point where to evaluate the polynomial.
@@ -15,18 +15,18 @@ def newton_horner(x, x_points:np.ndarray, y_points:np.ndarray = None, coeffs:np.
 
     Returns:
         float: the polynomial evaluated at x.
-    
+
     """
     coeffs_ = coeffs if coeffs is not None else horner_algorithm(x_points, y_points)
 
     N = len(x_points) - 1
     polynom = coeffs_[N]
-    
-    for k in range(1,N+1):
-        polynom = coeffs_[N-k] + (x -x_points[N-k])*polynom
-    
+
+    for k in range(1, N+1):
+        polynom = coeffs_[N-k] + (x - x_points[N-k])*polynom
+
     return polynom
-    
+
 
 def horner_algorithm(x: np.ndarray, y: np.ndarray) -> float:
     """ Computes Newton interpolation polynomial by Horner's algorithm for some given coordinates.

@@ -7,7 +7,7 @@ from numericalmethods.exceptions import InadequateArgsCombination
 def newton_horner(x, x_points: np.ndarray, y_points: np.ndarray = None, coeffs: np.ndarray = None) -> np.ndarray:
     """ Evaluates the polynomial returned by Horner's algorithm.
 
-    If no coefficients are given this method will compute them.
+    The user must give `y_points` or `coeffs`. If `coeffs` is not given this method will compute them with `x_points` and `y_points`.
 
     Args:
         x(float): The point where to evaluate the polynomial.
@@ -20,7 +20,7 @@ def newton_horner(x, x_points: np.ndarray, y_points: np.ndarray = None, coeffs: 
 
     """
     if y_points is None and coeffs is None:
-        raise
+        raise InadequateArgsCombination('Cannot evaluate Newton\'s polynomial with the combination of arguments given. Check the valid combinations.')
 
     coeffs_ = coeffs if coeffs is not None else horner_algorithm(x_points, y_points)
 

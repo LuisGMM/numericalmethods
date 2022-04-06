@@ -2,16 +2,16 @@
 import numpy as np
 
 
-def newton_horner(x, x_points:list = None, y_points:list = None, coeffs:list = None) -> np.ndarray:
+def newton_horner(x, x_points:np.ndarray = None, y_points:np.ndarray = None, coeffs:np.ndarray = None) -> np.ndarray:
     """ Evaluates the polynomial returned by Horner's algorithm.
 
     If no coefficients are given this method will compute them
 
     Args:
         x(float): The point where to evaluate the polynomial.
-        x(list(float)): x coordinates of the points.
-        y(list(float)): y coordinates of the points.
-        coeffs(list(float)): coefficients of the polynomial.
+        x(np.ndarray): `x` coordinates of the points.
+        y(np.ndarray): `y` coordinates of the points.
+        coeffs(np.ndarray): coefficients of the polynomial.
 
     Returns:
         float: the polynomial evaluated at x.

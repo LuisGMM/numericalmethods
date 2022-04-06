@@ -16,7 +16,7 @@ def newton_horner(x, x_points: np.ndarray, y_points: np.ndarray = None, coeffs: 
         coeffs(np.ndarray): coefficients of the polynomial. Defaults to None.
 
     Raises:
-        ValueError: If `x` and `y` are not of the same length. 
+        ValueError: If `x` and `y` are not of the same length.
 
     Returns:
         float: the polynomial evaluated at x.
@@ -50,7 +50,7 @@ def horner_algorithm(x: np.ndarray, y: np.ndarray) -> np.ndarray:
         y(np.ndarray): y coordinates of the points.
 
     Raises:
-        ValueError: If `x` and `y` are not of the same length. 
+        ValueError: If `x` and `y` are not of the same length.
 
     Returns:
         np.ndarray: Polynomial coefficients of the Newton interpolation.
@@ -64,7 +64,7 @@ def horner_algorithm(x: np.ndarray, y: np.ndarray) -> np.ndarray:
 
     for j in range(LEN):
         if j == 0:
-            matrix[:, 1] = y-
+            matrix[:, 1] = y
 
         for i in range(LEN-j):
             matrix[i, j] = (matrix[i+1, j] - matrix[i, j]) / (x[i+1] - x[i])

@@ -12,3 +12,13 @@ This package aims to give the typical UC3M (Universidad Carlos III de Madrid) th
 - Secant method
 - Chord method
 
+<!-- ### Interpolation
+
+- Lagrange method
+- Neville method -->
+
+<!-- ### Algorithms for polynomials
+
+- Briot-Ruffini method
+- Newton's Divided-Difference method -->
+

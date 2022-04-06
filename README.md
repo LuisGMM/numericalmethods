@@ -51,3 +51,13 @@ This package aims to give the typical UC3M (Universidad Carlos III de Madrid) th
 - Euler's explicit (forward) method for systems.
 - Newton's method for systems
 
+<!-- ### Methods for Linear Systems -->
+
+<!-- - Gaussian Elimination
+- Backward Substitution
+- Forward Substitution -->
+
+<!-- ### Iterative Methods for Linear Systems
+
+- Jacobi method
+- Gauss-Seidel method -->

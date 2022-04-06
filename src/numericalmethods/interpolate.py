@@ -15,7 +15,7 @@ def newton_horner(x: np.ndarray, y: np.ndarray) -> np.ndarray:
         ValueError: If `x` and `y` are not of the same length. 
 
     Returns:
-        list: with the polynomial coefficients of the Newton interpolation.
+        np.ndarray: Polynomial coefficients of the Newton interpolation.
 
     """
     if len(x) != len(y):

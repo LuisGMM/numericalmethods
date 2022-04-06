@@ -1,6 +1,8 @@
 
 import numpy as np
 
+from numericalmethods.exceptions import InadequateArgsCombination
+
 
 def newton_horner(x, x_points: np.ndarray, y_points: np.ndarray = None, coeffs: np.ndarray = None) -> np.ndarray:
     """ Evaluates the polynomial returned by Horner's algorithm.
@@ -10,13 +12,16 @@ def newton_horner(x, x_points: np.ndarray, y_points: np.ndarray = None, coeffs: 
     Args:
         x(float): The point where to evaluate the polynomial.
         x(np.ndarray): `x` coordinates of the points.
-        y(np.ndarray): `y` coordinates of the points.
-        coeffs(np.ndarray): coefficients of the polynomial.
+        y(np.ndarray): `y` coordinates of the points. Defaults to None.
+        coeffs(np.ndarray): coefficients of the polynomial. Defaults to None.
 
     Returns:
         float: the polynomial evaluated at x.
 
     """
+    if y_points is None and coeffs is None:
+        raise
+
     coeffs_ = coeffs if coeffs is not None else horner_algorithm(x_points, y_points)
 
     N = len(x_points) - 1

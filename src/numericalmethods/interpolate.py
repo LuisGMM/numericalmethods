@@ -4,6 +4,9 @@ import numpy as np
 
 def newton_horner(x: np.ndarray, y: np.ndarray) -> np.ndarray:
 
+    if len(x)!=len(y): 
+        raise ValueError('x and y must be the same length.')
+
     LEN = len(y)
     matrix = np.zeros((LEN, LEN))
 

@@ -8,7 +8,7 @@ def newton_horner(x, x_points:list = None, y_points:list = None, coeffs:list = N
     If no coefficients are given this method will compute them
 
     Args:
-        x(float): The points to evaluate the polynomial.
+        x(float): The point where to evaluate the polynomial.
         x(list(float)): x coordinates of the points.
         y(list(float)): y coordinates of the points.
         coeffs(list(float)): coefficients of the polynomial.

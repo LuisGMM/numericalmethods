@@ -20,7 +20,7 @@ def euler_explicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, 
         h (float): Separation between the points of the interval.
 
     Returns:
-        np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, t-h, t].
+        np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, ..., t-h, t].
 
     Examples:
 
@@ -70,7 +70,7 @@ def euler_explicit_midpoint(f: 'Callable[float, float]', y0: float, t0: float, t
         h (float): Separation between the points of the interval.
 
     Returns:
-        np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, t-h, t].
+        np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, ..., t-h, t].
 
     Examples:
 
@@ -125,7 +125,7 @@ def euler_explicit_systems(f: 'Callable[float, ...]', vec0: np.ndarray, t0: floa
         h (float): Separation between the points of the interval.
 
     Returns:
-        np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, t-h, t].
+        np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, ..., t-h, t].
 
     Examples:
         Lets solve the Lorentz equations :math:`$$\begin{array}{l}
@@ -191,7 +191,7 @@ def euler_implicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, 
         h (float): Separation between the points of the interval.
 
     Returns:
-        np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, t-h, t].
+        np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, ..., t-h, t].
     """
     returns_of_f = inspect.getsource(f).split('return')
     lambdas_of_f = inspect.getsource(f).split('lambda')
@@ -204,13 +204,13 @@ def euler_implicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, 
 
     if n_returns_of_f < 2 and n_lambdas_of_f < 2:
         raise ValueError('Function `f` is not valid. It must have one return or one lambda.')
-    
+
     elif n_returns_of_f == 2:
         function_of_f = returns_of_f[-1]
-    
+
     elif n_lambdas_of_f == 2:
         function_of_f = lambdas_of_f[-1].split(':')[-1]
-    
+
     t_ = np.arange(t0, t+h, h)
     N = len(t_)
 
@@ -223,9 +223,9 @@ def euler_implicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, 
             def g(y): return u[i] - u[i+1] + h*f(y, t_[i+1])
             u[i+1] = newton(*args, **kwargs, f=g, x0=u[i])
     else:
-        
-        for i in range(N-1):  
-            u[i+1] =  u[i]  + h*f(y=None, t=t_[i+1])
+      
+        for i in range(N-1):
+            u[i+1] = u[i] + h*f(y=None, t=t_[i+1])
 
     return u
 

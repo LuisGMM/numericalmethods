@@ -41,7 +41,7 @@ def euler_explicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, 
         >>> y = euler_explicit(f, y0, t0, t, h)
         >>> print(y)
     """
-    t_ = np.arange(t0, t0+t, h)
+    t_ = np.arange(t0, t+h, h)
     N = len(t_)
 
     u = np.zeros_like(t_)
@@ -91,7 +91,7 @@ def euler_explicit_midpoint(f: 'Callable[float, float]', y0: float, t0: float, t
         >>> y = euler_explicit_midpoint(f, y0, t0, t, h)
         >>> print(y)
     """
-    t_ = np.arange(t0, t0+t, h)
+    t_ = np.arange(t0, t+h, h)
     N = len(t_)
 
     u = np.zeros_like(t_)
@@ -157,7 +157,7 @@ def euler_explicit_systems(f: 'Callable[float, ...]', vec0: np.ndarray, t0: floa
         >>> ax.set_ylabel('y', labelpad=20)
         >>> ax.set_zlabel('z', labelpad=20)
     """
-    t_ = np.arange(t0, t0+t, h)
+    t_ = np.arange(t0, t+h, h)
     N = len(t_)
 
     u = np.zeros((vec0.shape[0], N))
@@ -247,7 +247,7 @@ def heun(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) 
     Returns:
         np.ndarray: Numerical solution of the ODE in the interval [t0, t0+h, t-h, t].
     """
-    t_ = np.arange(t0, t0+t, h)
+    t_ = np.arange(t0, t+h, h)
     N = len(t_)
 
     u = np.zeros_like(t_)

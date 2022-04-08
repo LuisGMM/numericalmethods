@@ -91,7 +91,7 @@ def newton(err: float = 1e-4, f: 'Callable[float]' = None, f_dev: 'Callable[floa
     else:
         raise InadequateArgsCombination('Cannot compute Newton\'s method with the combination of arguments given. Check the valid combinations.')
 
-    iter, iter_dict = 0, {0: x0}
+    iter, iter_dict = 0, {0: x0} # Not necessary to store all the values, but anyway
     limit = sys.getrecursionlimit()
 
     while True:

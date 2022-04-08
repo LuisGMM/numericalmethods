@@ -1,5 +1,5 @@
 
-from numericalmethods.ode import euler_explicit, euler_implicit
+from numericalmethods.ode import euler_explicit, euler_implicit, rk4
 
 
 def test_euler_explicit():
@@ -16,3 +16,12 @@ def test_euler_implicit_without_dependance_on_y():
     f = lambda y, t: (1 + t**3)**(1/2)
 
     assert list(euler_implicit(f=f, y0=0, t0=0, t=5, h=1)) == ans
+
+def test_runge_kutta4():
+
+    
+    ans =[1, 1.11034167, 1.24280514, 1.39971699, 1.58364848, 1.79744128,
+        2.04423592, 2.32750325, 2.65107913, 3.01920283, 3.43655949]
+    f = lambda y, t : y + t
+
+    assert list(rk4(f, y0=0, t0=0, t=1, h=0.1)) == ans

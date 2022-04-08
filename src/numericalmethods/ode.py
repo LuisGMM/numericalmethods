@@ -275,6 +275,17 @@ def runge_kutta4(f: 'Callable[float, float]', y0: float, t0: float, t: float, h:
 
     Returns:
         np.ndarray: Solution of y(t) in [t0, t]
+    
+    Examples:
+
+
+        >>> f = lambda y, t : y + t
+        >>> y0 = 0
+        >>> t0, t = 0, 1
+        >>> h = 0.1
+        >>> runge_kutta4(f, y0, t0, t, h)
+        [1.         1.11034167 1.24280514 1.39971699 1.58364848 1.79744128 
+        2.04423592 2.32750325 2.65107913 3.01920283 3.43655949]
     """    
     t_= np.arange(t0, t + h, h)
     N = len(t_)
@@ -292,14 +303,3 @@ def runge_kutta4(f: 'Callable[float, float]', y0: float, t0: float, t: float, h:
         u[i+1] = u[i] + (h / 6) * (f1 + (2 * f2) + (2 * f3) + f4)
         
     return u
-
-if __name__ == '__main__':
-
-    def f(x,y):
-        return x+y
-    
-    y0 = 1
-    t0, t = 0, 1
-    h = 0.1
-
-    print(runge_kutta4(f, y0, t0, t, h))

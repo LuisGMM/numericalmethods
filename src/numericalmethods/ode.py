@@ -275,7 +275,7 @@ def rk4(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) -
 
     Returns:
         np.ndarray: Solution of y(t) in [t0, t]
-    
+
     Examples:
 
         Lets solve the problem in the interval of time [0, 1]
@@ -290,10 +290,10 @@ def rk4(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) -
         >>> t0, t = 0, 1
         >>> h = 0.1
         >>> runge_kutta4(f, y0, t0, t, h)
-        [1.         1.11034167 1.24280514 1.39971699 1.58364848 1.79744128 
+        [1.         1.11034167 1.24280514 1.39971699 1.58364848 1.79744128
         2.04423592 2.32750325 2.65107913 3.01920283 3.43655949]
-    """    
-    t_= np.arange(t0, t + h, h)
+    """
+    t_ = np.arange(t0, t + h, h)
     N = len(t_)
 
     u = np.zeros_like(t_)

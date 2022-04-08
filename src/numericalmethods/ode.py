@@ -259,6 +259,23 @@ def heun(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) 
     return u
 
 
-def runge_kutta4(f: 'Callable[float, ...]', y0: float, t0: float, t: float, h: float) -> np.ndarray:...
-
+def runge_kutta4(f: 'Callable[float, ...]', y0: float, t0: float, t: float, h: float) -> np.ndarray:
     
+    
+    t_= np.arange(t0, t + h, h)
+    
+    N = len(t_)
+
+    u = np.zeros_like(t_)
+    u[0] = y0
+
+    for i in range(N-1):
+
+        f1 = f(t_[i], u[i])
+        f2 = f(t_[i] + h / 2, u[i] + (f1 * (h / 2)))
+        f3 = f(t_[i] + h / 2, u[i] + (f2 * (h / 2)))
+        f4 = f(t_[i] + h, u[i] + (f3 * h))
+
+        u[i+1] = u[i] + (h / 6) * (f1 + (2 * f2) + (2 * f3) + f4)
+        
+    return u

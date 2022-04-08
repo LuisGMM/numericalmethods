@@ -260,7 +260,7 @@ def heun(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) 
 
 
 def rk4(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) -> np.ndarray:
-    """Solve a first order ODE using Runge-Kutta's method of order 4.
+    r"""Solve a first order ODE using Runge-Kutta's method of order 4.
 
     Equivalent to ode45 in MATLAB.
 

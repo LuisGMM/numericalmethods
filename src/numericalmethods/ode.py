@@ -260,7 +260,22 @@ def heun(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) 
 
 
 def runge_kutta4(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) -> np.ndarray:
-  
+    """Solve a first order ODE using Runge-Kutta's method of order 4.
+
+    Equivalent to ode45 in MATLAB.
+
+    Args:
+        f (Callable[float, float]): Function of two variables representing the ODE. y' = f(y, t). 
+            Args must be in that order. 
+        y0 (float): Initial value of the solution.
+            Equivalent to y(t0).
+        t0 (float): Initial time.
+        t (float): Final time.
+        h (float): Separation between the points of the interval.
+
+    Returns:
+        np.ndarray: Solution of y(t) in [t0, t]
+    """    
     t_= np.arange(t0, t + h, h)
     N = len(t_)
 

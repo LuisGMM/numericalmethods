@@ -16,6 +16,7 @@ def newton_horner(x, x_points: np.ndarray, y_points: np.ndarray = None, coeffs: 
         coeffs(np.ndarray): coefficients of the polynomial. Defaults to None.
 
     Raises:
+        InadequateArgsCombination: If the combination  of arguments is not valid.
         ValueError: If `x` and `y` are not of the same length.
 
     Returns:

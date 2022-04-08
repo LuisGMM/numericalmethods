@@ -257,3 +257,8 @@ def heun(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) 
         u[i+1] = u[i] + h/2 * (f(u[i]+h*f(u[i], t_[i]), t_[i+1]) + f(u[i], t_[i]))
 
     return u
+
+
+def runge_kutta4(f: 'Callable[float, ...]', y0: float, t0: float, t: float, h: float) -> np.ndarray:...
+
+    

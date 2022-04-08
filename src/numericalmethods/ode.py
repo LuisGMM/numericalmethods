@@ -278,6 +278,12 @@ def runge_kutta4(f: 'Callable[float, float]', y0: float, t0: float, t: float, h:
     
     Examples:
 
+        Lets solve the problem in the interval of time [0, 1]
+
+        :math: `$$\begin{array}{l}
+                y'=  y + t \\
+                y(0) = 1
+                \end{array}$$`
 
         >>> f = lambda y, t : y + t
         >>> y0 = 0

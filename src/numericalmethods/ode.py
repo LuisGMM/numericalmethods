@@ -178,7 +178,7 @@ def euler_implicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, 
     If `f` argument has an explicit dependence on y, Newton\' method is used to compute the next iteration the algorithm.
     Then, `err` must be passed as extra argument, and it is recommended to pass the analytical derivative of `f` as f_dev.
     In case this last `f_dev` is not passed, Newton\' method will use finite differences to numerically obtain it.
-    
+
     See more about Newton\' method in module roots.
 
     Args:
@@ -223,7 +223,7 @@ def euler_implicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, 
             def g(y): return u[i] - u[i+1] + h*f(y, t_[i+1])
             u[i+1] = newton(*args, **kwargs, f=g, x0=u[i])
     else:
-      
+
         for i in range(N-1):
             u[i+1] = u[i] + h*f(y=None, t=t_[i+1])
 
@@ -265,7 +265,7 @@ def rk4(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) -
     Equivalent to ode45 in MATLAB.
 
     Args:
-        f (Callable[float, float]): Function of two variables representing the ODE. y' = f(y, t). 
+        f (Callable[float, float]): Function of two variables representing the ODE. y' = f(y, t).
             Args must be in that order. 
         y0 (float): Initial value of the solution.
             Equivalent to y(t0).
@@ -307,5 +307,5 @@ def rk4(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) -
         f4 = f(u[i] + (f3 * h), t_[i] + h)
 
         u[i+1] = u[i] + (h / 6) * (f1 + (2 * f2) + (2 * f3) + f4)
-        
+
     return u

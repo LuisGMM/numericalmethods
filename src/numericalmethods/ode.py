@@ -5,6 +5,7 @@ from typing import Callable
 import numpy as np
 
 from numericalmethods.roots import newton
+from numericalmethods.differentiate import forward
 
 
 def euler_explicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) -> np.ndarray:
@@ -221,7 +222,7 @@ def euler_implicit(f: 'Callable[float, float]', y0: float, t0: float, t: float, 
 
         for i in range(N-1):
             def g(y): return u[i] - u[i+1] + h*f(y, t_[i+1])
-            u[i+1] = newton(*args, **kwargs, f=g, x0=u[i])
+            u[i+1] = newton(f=g, differentiator=forward, x0=u[i], *args, **kwargs)
     else:
 
         for i in range(N-1):

@@ -266,7 +266,7 @@ def rk4(f: 'Callable[float, float]', y0: float, t0: float, t: float, h: float) -
 
     Args:
         f (Callable[float, float]): Function of two variables representing the ODE. y' = f(y, t).
-            Args must be in that order. 
+            Args must be in that order.
         y0 (float): Initial value of the solution.
             Equivalent to y(t0).
         t0 (float): Initial time.

@@ -149,4 +149,11 @@ def crank_nik_parabolic(h: float, k: float, x0: float, xf: float, t0: float, tf:
 
 
 def theta_parabolic(theta: float, h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: Callable) -> Tuple[np.ndarray]:
-    pass
+    s = k/h**2
+
+    x = np.arange(x0, xf+h, h)
+    t = np.arange(t0, tf+h, h)
+
+    LEN_X = len(x)
+    LEN_T = len(t)
+

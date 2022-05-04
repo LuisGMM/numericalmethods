@@ -2,6 +2,10 @@
 import numpy as np
 
 
+def __tridiag(a: float, b: float, c: float, k1: int = -1, k2: int = 0, k3: int = 1) -> np.ndarray:
+    pass
+
+
 def parabollic(theta, h: float, k: float, x0: float, xf: float, tf: float, u0: np.ndarray) -> np.ndarray:
     
     sigma = k/h**2

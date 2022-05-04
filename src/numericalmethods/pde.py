@@ -8,7 +8,7 @@ def __tridiag(v1: float, v2: float, v3: float, N: int, k1: int = -1, k2: int = 0
     return np.diag(np.full(N-abs(k1), v1), k1) + np.diag(np.full(N-abs(k2), v2), k2) + np.diag(np.full(N-abs(k3), v3), k3)
 
 
-def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: function) -> np.ndarray:
+def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: function) -> Tuple[np.ndarray]:
     '''Computes as parabollic PDE of the kind 
     :math: `$$\begin{array}{l}
                 \frac{du}{dt} = \frac{d^2u}{dt^2} \\
@@ -28,7 +28,7 @@ def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf:
         u0 (function): Function of x in t0. u(x, t0).
 
     Returns:
-        np.ndarray:
+        Tuple[np.ndarray]: Solution of the PDE in those intervals, x mesh, t mesh.
     '''
     s = k/h**2
 

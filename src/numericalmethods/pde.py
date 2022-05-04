@@ -108,3 +108,8 @@ def crank_nik_parabolic(h: float, k: float, x0: float, xf: float, t0: float, tf:
     LEN_X = len(x)
     LEN_T = len(t)
 
+    v1_left = v3_left = -s
+    v2_left = 2 + 2*s
+    
+    v1_right = v3_right = s
+    v2_right = 2 - 2*s

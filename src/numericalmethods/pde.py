@@ -18,6 +18,8 @@ def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf:
 
     over the interval :math: `$[t0,tf]$` for a stepsize `h` in x and `k` in t.
 
+    Note that the coefficient (`$1-2*k/h$`) should be nonnegative, otherwise the errors will be magnified.
+
     Args:
         h (float): Step size in x.
         k (float): Step size in t.

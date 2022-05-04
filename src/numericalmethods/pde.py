@@ -157,3 +157,8 @@ def theta_parabolic(theta: float, h: float, k: float, x0: float, xf: float, t0: 
     LEN_X = len(x)
     LEN_T = len(t)
 
+    v1_left = v3_left = theta-1
+    v2_left = -2*theta + 1
+    
+    v1_right = v3_right = theta*s
+    v2_right = -2*theta*s -1

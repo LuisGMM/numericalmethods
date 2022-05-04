@@ -49,6 +49,7 @@ def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf:
 
     sol = np.zeros((LEN_X, LEN_T))
     sol[:, 0] = u0(x)
+    sol[0, 0] = sol[-1, 0] = 0
 
     for ti in range(1, LEN_T):
         sol[:, ti] = m @ sol[:, ti-1]
@@ -94,6 +95,7 @@ def implicit_parabolic(h: float, k: float, x0: float, xf: float, t0: float, tf: 
 
     sol = np.zeros((LEN_X, LEN_T))
     sol[:, 0] = u0(x)
+    sol[0, 0] = sol[-1, 0] = 0
 
     for ti in range(1, LEN_T):
         sol[:, ti] = m @ sol[:, ti-1]
@@ -144,6 +146,7 @@ def crank_nik_parabolic(h: float, k: float, x0: float, xf: float, t0: float, tf:
 
     sol = np.zeros((LEN_X, LEN_T))
     sol[:, 0] = u0(x)
+    sol[0, 0] = sol[-1, 0] = 0
 
     for ti in range(1, LEN_T):
         sol[:, ti] = m @ sol[:, ti-1]
@@ -198,6 +201,7 @@ def theta_parabolic(theta: float, h: float, k: float, x0: float, xf: float, t0: 
 
     sol = np.zeros((LEN_X, LEN_T))
     sol[:, 0] = u0(x)
+    sol[0, 0] = sol[-1, 0] = 0
 
     for ti in range(1, LEN_T):
         sol[:, ti] = m @ sol[:, ti-1]

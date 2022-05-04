@@ -8,7 +8,7 @@ def __tridiag(v1: float, v2: float, v3: float, N: int, k1: int = -1, k2: int = 0
 
 def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: function) -> np.ndarray:
 
-    sigma = k/h**2
+    s = k/h**2
 
     x = np.arange(x0, xf+h, h)
     t = np.arange(t0, tf+h, h)
@@ -19,3 +19,15 @@ def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf:
     left_matrix = __tridiag()
     np.fill_diagonal()
     right_matrix = np.array([])
+    v1 = v3 = s
+    v2 = 1 - 2*s
+
+    m = __tridiag(v1, v2, v3, LEN_X)
+
+    sol = np.zeros((LEN_X, LEN_T))
+    sol[:, 0] = u0(x)
+
+    for ti in range(1, LEN_T):
+        sol[:, ti] = m@sol[:, ti-1]
+
+    return sol, x, t

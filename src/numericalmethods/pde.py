@@ -3,8 +3,7 @@ import numpy as np
 
 
 def __tridiag(v1: float, v2: float, v3: float, N: int, k1: int = -1, k2: int = 0, k3: int = 1) -> np.ndarray:
-
-    return np.diag(v1, k1) + np.diag(v2, k2) + np.diag(v3, k3)
+    return np.diag(np.full(N, v1), k1) + np.diag(np.full(N, v2), k2) + np.diag(np.full(N, v3), k3)
 
 
 

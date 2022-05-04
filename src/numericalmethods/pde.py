@@ -57,14 +57,15 @@ def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf:
 
 
 def implicit_parabolic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: Callable) -> Tuple[np.ndarray]:
-    r'''Computes a parabollic PDE of the kind:
+    r'''Computes, implicitly, a parabollic PDE of the kind:
     :math: `$$\begin{array}{l}
                 \frac{du}{dt} = \frac{d^2u}{dt^2} \\
                 u(x0,t) = u(xf,t) = 0 \\
                 u(x,t0) = u0
                 \end{array}$$`
 
-    over the interval :math: `$[t0,tf]$` for a stepsize `h` in x and `k` in t, with backward finite differences.
+    over the interval :math: `$[t0,tf]$` for a stepsize `h` in x and `k` in t,
+    with backward finite differences.
 
     Args:
         h (float): Step size in x.

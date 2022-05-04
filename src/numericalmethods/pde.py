@@ -133,7 +133,7 @@ def crank_nik_parabolic(h: float, k: float, x0: float, xf: float, t0: float, tf:
 
     v1_left = v3_left = -s
     v2_left = 2 + 2*s
-    
+
     v1_right = v3_right = s
     v2_right = 2 - 2*s
 
@@ -159,10 +159,10 @@ def theta_parabolic(theta: float, h: float, k: float, x0: float, xf: float, t0: 
                 u(x,t0) = u0
                 \end{array}$$`
 
-    over the interval :math: `$[t0,tf]$` for a stepsize `h` in x and `k` in t, 
+    over the interval :math: `$[t0,tf]$` for a stepsize `h` in x and `k` in t,
     using a customizable mixture between explicit and implicit finite differences.
 
-    To solve it explicitly use `theta=0`. `theta=1` solves the PDE implicitly, and 
+    To solve it explicitly use `theta=0`. `theta=1` solves the PDE implicitly, and
     `theta=1/2` does it with crank nikolson.
 
     Args:
@@ -187,9 +187,9 @@ def theta_parabolic(theta: float, h: float, k: float, x0: float, xf: float, t0: 
 
     v1_left = v3_left = theta-1
     v2_left = -2*theta + 1
-    
+
     v1_right = v3_right = theta*s
-    v2_right = -2*theta*s -1
+    v2_right = -2*theta*s - 1
 
     m_left = __tridiag(v1_left, v2_left, v3_left, LEN_X)
     m_right = __tridiag(v1_right, v2_right, v3_right, LEN_X)

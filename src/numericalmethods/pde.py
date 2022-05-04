@@ -1,5 +1,6 @@
 
 import numpy as np
 
-def parabollic(theta, sigma: float, t0: float, t: float, vec0: np.ndarray) -> np.ndarray:
-    pass 
+
+def parabollic(theta, h: float, k: float, x0: float, xf: float, tf: float, u0: np.ndarray) -> np.ndarray:
+    

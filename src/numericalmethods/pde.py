@@ -67,3 +67,12 @@ def implicit_parabolic(h: float, k: float, x0: float, xf: float, t0: float, tf: 
     v1 = v3 = -1
     v2 = 2 + s
 
+    m = s * __tridiag(v1, v2, v3, LEN_X)**(-1)
+
+    sol = np.zeros((LEN_X, LEN_T))
+    sol[:, 0] = u0(x)
+
+    for ti in range(1, LEN_T):
+        sol[:, ti] = m@sol[:, ti-1]
+
+    return sol, x, t

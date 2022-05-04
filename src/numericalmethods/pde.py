@@ -6,7 +6,7 @@ def __tridiag(v1: float, v2: float, v3: float, N: int, k1: int = -1, k2: int = 0
     return np.diag(np.full(N-abs(k1), v1), k1) + np.diag(np.full(N-abs(k2), v2), k2) + np.diag(np.full(N-abs(k3), v3), k3)
 
 
-def parabollic(theta, h: float, k: float, x0: float, xf: float, tf: float, u0: np.ndarray) -> np.ndarray:
+def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: function) -> np.ndarray:
 
     sigma = k/h**2
 

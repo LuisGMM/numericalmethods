@@ -16,7 +16,7 @@ def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf:
                 u(x,t0) = u0
                 \end{array}$$`
 
-    over the interval :math: `$[t0,tf]$` for a stepsize `h` in x and `k` in t.
+    over the interval :math: `$[t0,tf]$` for a stepsize `h` in x and `k` in t, with forward finite differences.
 
     Note that the coefficient (`$1-2*k/h$`) should be nonnegative, otherwise the errors will be magnified.
 

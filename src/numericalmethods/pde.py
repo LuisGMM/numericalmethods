@@ -2,8 +2,8 @@
 import numpy as np
 
 
-def __tridiag(a: float, b: float, c: float, k1: int = -1, k2: int = 0, k3: int = 1) -> np.ndarray:
-    return np.diag(a, k1) + np.diag(b, k2) + np.diag(c, k3)
+def __tridiag(v1: float, v2: float, v3: float, k1: int = -1, k2: int = 0, k3: int = 1) -> np.ndarray:
+    return np.diag(v1, k1) + np.diag(v2, k2) + np.diag(v3, k3)
 
 
 

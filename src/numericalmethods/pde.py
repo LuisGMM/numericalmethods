@@ -16,9 +16,6 @@ def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf:
     LEN_X = len(x)
     LEN_T = len(t)
 
-    left_matrix = __tridiag()
-    np.fill_diagonal()
-    right_matrix = np.array([])
     v1 = v3 = s
     v2 = 1 - 2*s
 

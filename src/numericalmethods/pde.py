@@ -168,3 +168,10 @@ def theta_parabolic(theta: float, h: float, k: float, x0: float, xf: float, t0: 
 
     m = (m_left**(-1)) @ m_right
 
+    sol = np.zeros((LEN_X, LEN_T))
+    sol[:, 0] = u0(x)
+
+    for ti in range(1, LEN_T):
+        sol[:, ti] = m @ sol[:, ti-1]
+
+    return sol, x, t

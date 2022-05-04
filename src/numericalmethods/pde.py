@@ -3,7 +3,8 @@ import numpy as np
 
 
 def __tridiag(a: float, b: float, c: float, k1: int = -1, k2: int = 0, k3: int = 1) -> np.ndarray:
-    pass
+    return np.diag(a, k1) + np.diag(b, k2) + np.diag(c, k3)
+
 
 
 def parabollic(theta, h: float, k: float, x0: float, xf: float, tf: float, u0: np.ndarray) -> np.ndarray:

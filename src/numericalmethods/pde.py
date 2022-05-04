@@ -162,3 +162,9 @@ def theta_parabolic(theta: float, h: float, k: float, x0: float, xf: float, t0: 
     
     v1_right = v3_right = theta*s
     v2_right = -2*theta*s -1
+
+    m_left = __tridiag(v1_left, v2_left, v3_left, LEN_X)
+    m_right = __tridiag(v1_right, v2_right, v3_right, LEN_X)
+
+    m = (m_left**(-1)) @ m_right
+

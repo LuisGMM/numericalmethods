@@ -49,7 +49,7 @@ def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf:
     sol[:, 0] = u0(x)
 
     for ti in range(1, LEN_T):
-        sol[:, ti] = m@sol[:, ti-1]
+        sol[:, ti] = m @ sol[:, ti-1]
 
     return sol, x, t
 
@@ -93,7 +93,7 @@ def implicit_parabolic(h: float, k: float, x0: float, xf: float, t0: float, tf: 
     sol[:, 0] = u0(x)
 
     for ti in range(1, LEN_T):
-        sol[:, ti] = m@sol[:, ti-1]
+        sol[:, ti] = m @ sol[:, ti-1]
 
     return sol, x, t
 
@@ -137,13 +137,13 @@ def crank_nik_parabolic(h: float, k: float, x0: float, xf: float, t0: float, tf:
     m_left = __tridiag(v1_left, v2_left, v3_left, LEN_X)
     m_right = __tridiag(v1_right, v2_right, v3_right, LEN_X)
 
-    m = (m_left**(-1))@m_right
+    m = (m_left**(-1)) @ m_right
 
     sol = np.zeros((LEN_X, LEN_T))
     sol[:, 0] = u0(x)
 
     for ti in range(1, LEN_T):
-        sol[:, ti] = m@sol[:, ti-1]
+        sol[:, ti] = m @ sol[:, ti-1]
 
     return sol, x, t
 

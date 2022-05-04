@@ -15,6 +15,9 @@ def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf:
                 u(x0,t) = u(xf,t) = 0 \\
                 u(x,t0) = u0
                 \end{array}$$`
+
+    over the interval :math: `$[t0,tf]$` for a stepsize `h` in x and `k` in t.
+
     s = k/h**2
 
     x = np.arange(x0, xf+h, h)

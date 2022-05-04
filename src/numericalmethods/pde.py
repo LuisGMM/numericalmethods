@@ -55,4 +55,15 @@ def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf:
 
 
 def implicit_parabolic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: Callable) -> Tuple[np.ndarray]:
-    pass
+
+    s = h**2/k
+
+    x = np.arange(x0, xf+h, h)
+    t = np.arange(t0, tf+h, h)
+
+    LEN_X = len(x)
+    LEN_T = len(t)
+
+    v1 = v3 = -1
+    v2 = 2 + s
+

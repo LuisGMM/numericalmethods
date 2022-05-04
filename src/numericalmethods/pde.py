@@ -9,7 +9,12 @@ def __tridiag(v1: float, v2: float, v3: float, N: int, k1: int = -1, k2: int = 0
 
 
 def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: function) -> np.ndarray:
-
+    '''Computes as parabollic PDE of the kind 
+    :math: `$$\begin{array}{l}
+                \frac{du}{dt} = \frac{d^2u}{dt^2} \\
+                u(x0,t) = u(xf,t) = 0 \\
+                u(x,t0) = u0
+                \end{array}$$`
     s = k/h**2
 
     x = np.arange(x0, xf+h, h)

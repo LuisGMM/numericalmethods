@@ -17,6 +17,6 @@ def parabollic(theta, h: float, k: float, x0: float, xf: float, tf: float, u0: n
     LEN_X = len(x)
     LEN_T = len(t)
 
-    left_matrix = np.zeros((LEN_X, LEN_X))
+    left_matrix = __tridiag()
     np.fill_diagonal()
     right_matrix = np.array([])

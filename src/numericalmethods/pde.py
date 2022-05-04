@@ -1,5 +1,5 @@
 
-from typing import Tuple
+from typing import Tuple, Callable
 
 import numpy as np
 
@@ -8,8 +8,8 @@ def __tridiag(v1: float, v2: float, v3: float, N: int, k1: int = -1, k2: int = 0
     return np.diag(np.full(N-abs(k1), v1), k1) + np.diag(np.full(N-abs(k2), v2), k2) + np.diag(np.full(N-abs(k3), v3), k3)
 
 
-def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: function) -> Tuple[np.ndarray]:
-    '''Computes as parabollic PDE of the kind 
+def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: Callable) -> Tuple[np.ndarray]:
+    r'''Computes as parabollic PDE of the kind:
     :math: `$$\begin{array}{l}
                 \frac{du}{dt} = \frac{d^2u}{dt^2} \\
                 u(x0,t) = u(xf,t) = 0 \\

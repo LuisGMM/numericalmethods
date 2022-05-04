@@ -52,3 +52,7 @@ def explicit_parabollic(h: float, k: float, x0: float, xf: float, t0: float, tf:
         sol[:, ti] = m@sol[:, ti-1]
 
     return sol, x, t
+
+
+def implicit_parabolic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: Callable) -> Tuple[np.ndarray]:
+    pass

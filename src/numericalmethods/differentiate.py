@@ -46,7 +46,7 @@ def backward(order: int, f: Callable[[float], float], x: float, h: float, exact:
     return sum([(-1)**(k) * sci.comb(order, k, exact) * f(x - k*h) for k in range(order+1)]) / h**order
 
 
-def central(order: int, f: 'Callable', x: float, h: float, exact: bool = False) -> float:
+def central(order: int, f: Callable[[float], float], x: float, h: float, exact: bool = False) -> float:
     """Use central finite difference formula of order `order` to compute the derivative of `f` at `x`.
 
     Args:

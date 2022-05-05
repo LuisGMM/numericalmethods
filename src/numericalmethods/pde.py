@@ -311,5 +311,5 @@ def implicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: flo
     return sol, x, t
 
 
-def hyperbolic(v: float, K: float, h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: Callable) -> Tuple[np.ndarray]:
+def hyperbolic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: Callable) -> Tuple[np.ndarray]:
     

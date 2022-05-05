@@ -233,7 +233,7 @@ def chord(f: OneArgFunction, a: float, b: float, err: float, Nmax: int = 100_000
     This is checked using bolzano's theorem (If :math:`f(a)*f(b) >= 0`).
 
     Args:
-        f (Callable[float]): Function of which we want to find roots :math:`f(x)=0`.
+        f (OneArgFunction): Function of which we want to find roots :math:`f(x)=0`.
         a (float): Lower bound of the interval.
         b (float): Upper bound of the interval.
         err (float): Tolerance of the result. It assures that the root is in :math:`[x-err, x+err]`. #TODO: Is this the interval?

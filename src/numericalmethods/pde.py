@@ -207,3 +207,7 @@ def theta_parabolic(theta: float, h: float, k: float, x0: float, xf: float, t0: 
         sol[:, ti] = m @ sol[:, ti-1]
 
     return sol, x, t
+
+
+def expicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: Callable) -> Tuple[np.ndarray]:
+    pass

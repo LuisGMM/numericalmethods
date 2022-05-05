@@ -226,7 +226,7 @@ def bisection(f: OneArgFunction, a: float, b: float, err: float, Nmax: int = 100
 # TODO: Not validated
 
 
-def chord(f: 'Callable[float]', a: float, b: float, err: float, Nmax: int = 100_000, x0: float = None) -> float:
+def chord(f: OneArgFunction, a: float, b: float, err: float, Nmax: int = 100_000, x0: float = None) -> float:
     r"""Computes Chord method to find roots f(x)=0.
 
     If there are no roots in the interval :math:`[a, b]`, the method will throw an exception.

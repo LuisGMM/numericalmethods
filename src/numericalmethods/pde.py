@@ -217,6 +217,10 @@ def expicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: floa
                 U(x,t0)=u0(x) \\
                 \end{array}$$`
 
+    where :math:`$v$` is the river's velocity, and :math:`$K$` the diffusion coefficient,
+    over the interval :math: `$[t0,tf]$` for a stepsize `h` in x and `k` in t,7
+    using froward finite differences.
+
     s = k/h
 
     x = np.arange(x0, xf+h, h)

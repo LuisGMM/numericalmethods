@@ -1,6 +1,6 @@
 import sys
 import warnings
-from typing import Callable, Union, Optional
+from typing import Callable, Optional
 
 import numpy as np
 

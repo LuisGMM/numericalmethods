@@ -119,8 +119,8 @@ def newton_systems(f: VectorFunction, J: Matrix, vec0: np.ndarray, err: float) -
     r"""Solves systems of linear and nonlinear equations using the Newton method.
 
     Args:
-        J (Callable[[...], ...]): Jacobian of f.
         f (VectorFunction): Vector function to find its roots.
+        J (Matrix): Jacobian of f.
         vec0 (np.ndarray): Initial guess of the solution. Avoid using guesses that make J a singular matrix (:math:`|J(vec0)| = 0`).
         err (float): Stopping criteria for the algorithm. Minimum difference between the to last consecutive solutions.
 

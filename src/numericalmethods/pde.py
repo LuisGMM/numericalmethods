@@ -210,7 +210,7 @@ def theta_parabolic(theta: float, h: float, k: float, x0: float, xf: float, t0: 
 
 
 def expicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: Callable) -> Tuple[np.ndarray]:
-    r'''Computes, explicitly, a the Advection diffusion PDE of the kind:
+    r'''Computes, explicitly, the Advection diffusion PDE of the kind:
     :math: `$$\begin{array}{l}
                 U_t+v U_x=K U_{xx} \\
                 U(x0,t) = 0 \; \textrm{ and } \; \frac{\partial U}{\partial x}(xf, t)=0 \\

@@ -6,7 +6,7 @@ import pandas as pd
 # TODO: Account doc | & functionality for the kwargs
 
 
-def to_latex(col_names: 'List[str, ...]', cols: 'List[List, ...]', **kwargs) -> str:
+def to_latex(col_names: List[str], cols: List[List[Any]], **kwargs) -> Union[str, Any]:
     """High-level wrapper of pandas.DataFrame.to_latex with limited options.
 
     Zips the strings in col_names with the sublists in cols and generates a LaTeX table in string format.

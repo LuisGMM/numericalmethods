@@ -245,8 +245,8 @@ def expicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: floa
 
     v1 = K*s/h
     v2 = -2*K*s/h - v*s + 1
-    v3 = K*s/h -v*s
-    
+    v3 = K*s/h - v*s
+
     m = __tridiag(v1, v2, v3, LEN_X)
 
     sol = np.zeros((LEN_X, LEN_T))
@@ -254,7 +254,7 @@ def expicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: floa
 
     for ti in range(1, LEN_T):
         sol[:, ti] = m @ sol[:, ti-1]
-    
+
     return sol, x, t
 
 
@@ -295,7 +295,7 @@ def implicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: flo
     v1 = v*s + K*s/h
     v2 = -2*K*s/h - v*s + 1
     v3 = K*s/h
-    
+
     m = __tridiag(v1, v2, v3, LEN_X)
 
     sol = np.zeros((LEN_X, LEN_T))
@@ -307,13 +307,12 @@ def implicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: flo
 
     for ti in range(1, LEN_T):
         sol[:, ti] = m @ sol[:, ti-1]
-    
+
     return sol, x, t
 
 
 def hyperbolic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: Callable) -> Tuple[np.ndarray]:
-    
-    rho = (k/h)**2
+
     raise NotImplementedError()
 
 

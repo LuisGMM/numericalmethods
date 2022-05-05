@@ -223,3 +223,11 @@ def expicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: floa
     v3 = K*s/h -v*s
     
     m = __tridiag(v1, v2, v3, LEN_X)
+
+    sol = np.zeros((LEN_X, LEN_T))
+    sol[:, 0] = u0(x)
+
+    for ti in range(1, LEN_T):
+        sol[:, ti] = m@sol[:, ti-1]
+    
+    return sol, x, t

@@ -259,6 +259,12 @@ def expicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: floa
 
 
 def implicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: Callable) -> Tuple[np.ndarray]:
+    r'''Computes, implicitly, the Advection diffusion PDE of the kind:
+    :math: `$$\begin{array}{l}
+                U_t+v U_x=K U_{xx} \\
+                U(x0,t) = 0 \; \textrm{ and } \; \frac{\partial U}{\partial x}(xf, t)=0 \\
+                U(x,t0)=u0(x) \\
+                \end{array}$$`
     s = k/h
 
     x = np.arange(x0, xf+h, h)

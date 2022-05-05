@@ -16,6 +16,8 @@ from numericalmethods.exceptions import InadequateArgsCombination
 OneArgFunction = Callable[[float], float]
 Integrator = Callable[[OneArgFunction, float, float, float], float]
 Differentiator = Callable[[int, OneArgFunction, float, float, bool], float]
+VectorFunction = Callable[[Sequence[float]], Sequence[float]]
+Matrix = Callable[[Sequence[float]], Sequence[List[float]]]
 
 
 def newton(err: float = 1e-4, f: Optional[OneArgFunction] = None, f_dev: Optional[OneArgFunction] = None,

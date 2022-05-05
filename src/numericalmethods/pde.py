@@ -253,7 +253,7 @@ def expicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: floa
     sol[:, 0] = u0(x)
 
     for ti in range(1, LEN_T):
-        sol[:, ti] = m@sol[:, ti-1]
+        sol[:, ti] = m @ sol[:, ti-1]
     
     return sol, x, t
 
@@ -306,7 +306,6 @@ def implicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: flo
     # ---
 
     for ti in range(1, LEN_T):
-
-        sol[:, ti] = m@sol[:, ti-1]
+        sol[:, ti] = m @ sol[:, ti-1]
     
     return sol, x, t

@@ -113,7 +113,7 @@ def newton(err: float = 1e-4, f: Optional[OneArgFunction] = None, f_dev: Optiona
         iter += 1
 
 
-def newton_systems(f: 'Callable[float, ...]', J: 'Callable[float, ...]', vec0: np.ndarray, err: float) -> np.ndarray:
+def newton_systems(f: 'Callable[[...], ...]', J: 'Callable[[...], ...]', vec0: np.ndarray, err: float) -> np.ndarray:
     r"""Solves systems of linear and nonlinear equations using the Newton method.
 
     Args:

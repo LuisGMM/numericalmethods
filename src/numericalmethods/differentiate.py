@@ -4,7 +4,7 @@ from typing import Callable
 import scipy.special as sci
 
 
-def forward(order: int, f: 'Callable', x: float, h: float, exact: bool = False) -> float:
+def forward(order: int, f: Callable[[float], float], x: float, h: float, exact: bool = False) -> float:
     """Use forward finite difference formula of order `order` to compute the derivative of `f` at `x`.
 
     Args:

@@ -30,7 +30,7 @@ def backward(order: int, f: Callable[[float], float], x: float, h: float, exact:
 
     Args:
         order (int): Order of the derivate. (first, second ...).
-        f (Callable): Function for which the derivative will be computed.
+        f (Callable[[float], float]): Function for which the derivative will be computed.
             Only one argument will be passed to it, `x`.
         x (float): Point at which the derivative will be computed.
         h (float): Error of the approximation # TODO: Is it the error?

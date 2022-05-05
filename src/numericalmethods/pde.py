@@ -222,7 +222,7 @@ def expicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: floa
     using `forward finite differences`.
 
     Args:
-        v (flaot): River's velocity.
+        v (float): River's velocity.
         K (float): Diffusion coefficient.
         h (float): Step size in x.
         k (float): Step size in t.
@@ -271,7 +271,7 @@ def implicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: flo
     using `backward finite differences`.
 
     Args:
-        v (flaot): River's velocity.
+        v (float): River's velocity.
         K (float): Diffusion coefficient.
         h (float): Step size in x.
         k (float): Step size in t.

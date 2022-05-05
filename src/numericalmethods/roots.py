@@ -170,7 +170,7 @@ def newton_systems(f: 'Callable[[...], ...]', J: 'Callable[[...], ...]', vec0: n
         iter += 1
 
 
-def bisection(f: 'Callable[float]', a: float, b: float, err: float, Nmax: int = 100_000) -> float:
+def bisection(f: OneArgFunction, a: float, b: float, err: float, Nmax: int = 100_000) -> float:
     r"""Computes Bisection method to find roots f(x)=0.
 
     If there are no roots in the interval :math:`[a, b]`, the method will throw an exception.

@@ -103,7 +103,7 @@ def newton(err: float = 1e-4, f: Optional[OneArgFunction] = None, f_dev: Optiona
             warnings.warn(
                 f'Iteration limit ({limit}) reached without finding any root. Try with other initial guess or changing the recursion limit. \
                     Maybe there are no roots.')
-            return
+            return None
 
         iter_dict[iter+1] = iteration(iter, iter_dict)
 

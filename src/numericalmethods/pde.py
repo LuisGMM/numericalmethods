@@ -315,3 +315,7 @@ def hyperbolic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u
     
     rho = (k/h)**2
     raise NotImplementedError()
+
+
+def elliptic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: Callable) -> Tuple[np.ndarray]:
+    raise NotImplementedError()

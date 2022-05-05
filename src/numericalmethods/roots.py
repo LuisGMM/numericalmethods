@@ -17,9 +17,9 @@ OneArgFunction = Callable[[float], float]
 Integrator = Callable[[OneArgFunction, float, float, float], float]
 Differentiator = Callable[[int, OneArgFunction, float, float, bool], float]
 
-def newton(err: float = 1e-4, f: 'Callable[float]' = None, f_dev: 'Callable[float]' = None,
            integrator: 'Callable[Callable, float, float, float]' = None, differentiator: 'Callable[int, Callable, float, float, bool]' = None, *,
            c: float = 0, x0: float = 0, n: int = 100_000, h_err: float = 1e-4) -> float:
+def newton(err: float = 1e-4, f: Optional[OneArgFunction] = None, f_dev: Optional[OneArgFunction] = None,
     r"""Newton's method to find roots of a function.
 
     If no `f` is given but `f_dev` and `integrator` are, it will compute the roots of the integral of `f_dev` with integration constant c.

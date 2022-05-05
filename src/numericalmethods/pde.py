@@ -218,3 +218,8 @@ def expicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: floa
     LEN_X = len(x)
     LEN_T = len(t)
 
+    v1 = K*s/h
+    v2 = -2*K*s/h - v*s + 1
+    v3 = K*s/h -v*s
+    
+    m = __tridiag(v1, v2, v3, LEN_X)

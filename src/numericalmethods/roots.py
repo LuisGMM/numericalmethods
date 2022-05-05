@@ -265,7 +265,7 @@ def chord(f: OneArgFunction, a: float, b: float, err: float, Nmax: int = 100_000
     raise ValueError(f'Could not find a root in the interval [{a}, {b}] with tolerance {err} in {Nmax} iterations.')
 
 
-def secant(f: 'Callable[float]', a: float, b: float, err: float, Nmax: int = 100_000, x0: float = None) -> float:
+def secant(f: OneArgFunction, a: float, b: float, err: float, Nmax: int = 100_000, x0: float = None) -> float:
     r"""Computes Secant method to find roots :math:`f(x)=0`.
 
     If there are no roots in the interval :math:`[a, b]`, the method will throw an exception.

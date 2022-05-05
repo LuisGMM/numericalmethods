@@ -13,6 +13,9 @@ from numericalmethods.exceptions import InadequateArgsCombination
 # TODO: Improve docstrings; implement examples.
 # TODO: Implement testcases.
 
+OneArgFunction = Callable[[float], float]
+Integrator = Callable[[OneArgFunction, float, float, float], float]
+Differentiator = Callable[[int, OneArgFunction, float, float, bool], float]
 
 def newton(err: float = 1e-4, f: 'Callable[float]' = None, f_dev: 'Callable[float]' = None,
            integrator: 'Callable[Callable, float, float, float]' = None, differentiator: 'Callable[int, Callable, float, float, bool]' = None, *,

@@ -326,5 +326,11 @@ def hyperbolic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u
     sol[1:-1, 0] = u0(x)
 
     sol[1:-1, 1] = 1/2 * rho * (u0(x+h)[1:-1] - u0(x-h)[1:-1]) + (1 - rho) * u0(x)
+
+    for ti in range(2, LEN_T):
+        sol[1:-1, ti] = rho*sol[2:, ti] + 2*(1 - rho)*sol[:, ti] + rho*sol[:-2, ti]  - sol[:, ti-1]
+
+    return sol, x, t
+
 def elliptic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: Callable) -> Tuple[np.ndarray]:
     raise NotImplementedError()

@@ -312,6 +312,14 @@ def implicit_advection_diffusion(v: float, K: float, h: float, k: float, x0: flo
 
 
 def hyperbolic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: Callable) -> Tuple[np.ndarray]:
+    r'''Computes, a hyperbolic PDE of the kind:
+    :math: `$$\begin{array}{l}
+                U_{tt}=U_{xx} \\
+                U(x0,t)=U(xf,t)=0 \; \textrm{ and } \; \frac{\partial U}{\partial t}(x, t0)=0 \\
+                U(x,t0)=u0(x) \\
+                \end{array}$$`
+
+    over the interval :math: `$[t0,tf]$` for a stepsize `h` in x and `k` in t.
 
     rho = (k/h)**2
 

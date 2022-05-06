@@ -321,5 +321,6 @@ def hyperbolic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u
     LEN_X = len(x)
     LEN_T = len(t)
 
+    sol = np.zeros((LEN_X, LEN_T))
 def elliptic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u0: Callable) -> Tuple[np.ndarray]:
     raise NotImplementedError()

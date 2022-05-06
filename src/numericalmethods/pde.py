@@ -321,6 +321,18 @@ def hyperbolic(h: float, k: float, x0: float, xf: float, t0: float, tf: float, u
 
     over the interval :math: `$[t0,tf]$` for a stepsize `h` in x and `k` in t.
 
+    Args:
+        h (float): Step size in x.
+        k (float): Step size in t.
+        x0 (float): Initial position.
+        xf (float): Final position.
+        t0 (float): Initial time.
+        tf (float): Final time.
+        u0 (function): Function of x in t0. u(x, t0).
+
+    Returns:
+        Tuple[np.ndarray]: Solution of the PDE in those intervals, x mesh, t mesh.
+    '''
     rho = (k/h)**2
 
     x = np.arange(x0, xf+h, h)

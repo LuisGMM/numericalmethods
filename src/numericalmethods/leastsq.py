@@ -26,7 +26,7 @@ def leastsq(x: np.ndarray, y: np.ndarray, sigma: float) -> 'tuple[[float, float]
 
     div = 1 / (sum_x**2 - n*sum_x2)
     m = (sum_x*sum_y - n*sum_xy) * div
-    b = (sum_x*sum_xy - sum_xy*sum_x2) * div
+    b = (sum_x*sum_xy - sum_y*sum_x2) * div
 
     m_e = np.sqrt(n*sigma**2 * (-1) * div)
     b_e = np.sqrt(sum_x2*sigma**2 * (-1) * div)
